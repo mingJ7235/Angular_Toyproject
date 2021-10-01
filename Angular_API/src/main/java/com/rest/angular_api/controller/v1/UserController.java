@@ -1,7 +1,11 @@
 package com.rest.angular_api.controller.v1;
 
 import com.rest.angular_api.entity.User;
+import com.rest.angular_api.model.response.CommonResult;
+import com.rest.angular_api.model.response.ListResult;
+import com.rest.angular_api.model.response.SingleResult;
 import com.rest.angular_api.repository.UserJapRepo;
+import com.rest.angular_api.service.ResponseService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -16,11 +20,22 @@ import java.util.List;
 @RequestMapping (value = "/v1")
 public class UserController {
     private final UserJapRepo userJapRepo;
+    private final ResponseService responseService;
 
     @ApiOperation(value = "회원 조회", notes = "모든 회원 조회 API")
     @GetMapping (value = "/user")
-    public List<User> findAllUser () {
-        return userJapRepo.findAll();
+    public ListResult<User> findAllUser () {
+//        return userJapRepo.findAll();
+        return responseService.getListResult(userJapRepo.findAll());
+    }
+
+    @ApiOperation(value = "회원 단건 조회", notes = "userId로 회원 조회")
+    @GetMapping(value = "/user/{msrl}")
+    public SingleResult<User> findUserById (
+            @ApiParam (value = "회원 ID", required = true) @PathVariable long msrl
+    ) throws Exception
+    {
+        return responseService.getSingleResult(userJapRepo.findById(msrl).orElseThrow(Exception::new));
     }
 
     @ApiOperation(value = "회원 입력", notes = "회원 등록 API")
@@ -35,4 +50,29 @@ public class UserController {
                 .build();
         return userJapRepo.save(user);
     }
+
+    @ApiOperation(value = "회원 수정", notes = "회원 정보 수정 API")
+    @PutMapping (value = "/user")
+    public SingleResult<User> modify (
+        @ApiParam (value = "회원번호", required = true) @RequestParam long msrl,
+        @ApiParam (value = "회원아이디", required = true) @RequestParam String uid,
+        @ApiParam (value = "회원 이름", required = true) @RequestParam String name
+    ){
+        User user = User.builder()
+                .msrl(msrl)
+                .uid(uid)
+                .name(name)
+                .build();
+        return responseService.getSingleResult(userJapRepo.save(user));
+    }
+
+    @ApiOperation(value = "회원 삭제", notes = "user id로 회원 정보 삭제 API")
+    @DeleteMapping (value = "/user/{msrl}")
+    public CommonResult delete (
+            @ApiParam (value = "회원정보", required = true) @PathVariable long msrl
+    ) {
+        userJapRepo.deleteById(msrl);
+        return responseService.getSuccessResult();
+    }
+
 }
