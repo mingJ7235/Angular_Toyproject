@@ -1,6 +1,7 @@
 package com.rest.angular_api.controller.v1;
 
 import com.rest.angular_api.entity.User;
+import com.rest.angular_api.exception.CUserNotFound;
 import com.rest.angular_api.model.response.CommonResult;
 import com.rest.angular_api.model.response.ListResult;
 import com.rest.angular_api.model.response.SingleResult;
@@ -33,9 +34,9 @@ public class UserController {
     @GetMapping(value = "/user/{msrl}")
     public SingleResult<User> findUserById (
             @ApiParam (value = "회원 ID", required = true) @PathVariable long msrl
-    ) throws Exception
+    )
     {
-        return responseService.getSingleResult(userJapRepo.findById(msrl).orElseThrow(Exception::new));
+        return responseService.getSingleResult(userJapRepo.findById(msrl).orElseThrow(CUserNotFound::new));
     }
 
     @ApiOperation(value = "회원 입력", notes = "회원 등록 API")

@@ -1,5 +1,6 @@
 package com.rest.angular_api.advice;
 
+import com.rest.angular_api.exception.CUserNotFound;
 import com.rest.angular_api.model.response.CommonResult;
 import com.rest.angular_api.service.ResponseService;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +34,12 @@ public class ExceptionAdvice {
      */
     @ResponseStatus (HttpStatus.INTERNAL_SERVER_ERROR)
     protected CommonResult defaultException (HttpServletRequest request, Exception e){
+        return responseService.getFailResult();
+    }
+
+    @ExceptionHandler (CUserNotFound.class)
+    @ResponseStatus (HttpStatus.INTERNAL_SERVER_ERROR)
+    protected CommonResult userNotFoundException (HttpServletRequest request, CUserNotFound e) {
         return responseService.getFailResult();
     }
 }
