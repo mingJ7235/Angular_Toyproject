@@ -19,6 +19,11 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * JWT Token 생성 및 유효성 검증 컴포넌트
+ * - JWT는 여러가지 암호화 알고리즘을 제공하며 알고리즘 (SignatureAlgorithm.XXXXX)과 비밀키 (secretKey) 를 가지고 토큰을 생성한다.
+ * -
+ */
 @RequiredArgsConstructor
 @Component
 public class JwtTokenProvider { //JWT 토큰을 생성 및 검증 모듈
