@@ -4,6 +4,8 @@ import com.rest.angular_api.exception.CUserNotFound;
 import com.rest.angular_api.model.response.CommonResult;
 import com.rest.angular_api.service.ResponseService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -21,6 +23,8 @@ import javax.servlet.http.HttpServletRequest;
 public class ExceptionAdvice {
     private final ResponseService responseService;
 
+    private  final MessageSource messageSource;
+
     /**
      * ExceptionHandler
      * - Exception이 발생시, 해당 Handler로 처리 하겠다는 annotation.
@@ -34,12 +38,20 @@ public class ExceptionAdvice {
      */
     @ResponseStatus (HttpStatus.INTERNAL_SERVER_ERROR)
     protected CommonResult defaultException (HttpServletRequest request, Exception e){
-        return responseService.getFailResult();
+        return responseService.getFailResult(Integer.valueOf(getMessage("unKnown.code")), getMessage("unKnown.msg"));
     }
 
     @ExceptionHandler (CUserNotFound.class)
     @ResponseStatus (HttpStatus.INTERNAL_SERVER_ERROR)
     protected CommonResult userNotFoundException (HttpServletRequest request, CUserNotFound e) {
-        return responseService.getFailResult();
+        return responseService.getFailResult(Integer.valueOf(getMessage("userNotFound.code")), getMessage("userNotFound.msg"));
+    }
+
+    private String getMessage (String code) {
+        return getMessage(code, null);
+    }
+
+    private String getMessage (String code, Object[] args) {
+        return messageSource.getMessage(code, args, LocaleContextHolder.getLocale());
     }
 }
