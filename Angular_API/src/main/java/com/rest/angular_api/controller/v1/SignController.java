@@ -1,22 +1,22 @@
 package com.rest.angular_api.controller.v1;
 
+import com.rest.angular_api.advice.exception.CUserNotFoundException;
 import com.rest.angular_api.config.security.JwtTokenProvider;
 import com.rest.angular_api.entity.User;
 import com.rest.angular_api.advice.exception.CEmailSignInFailedException;
 import com.rest.angular_api.model.response.CommonResult;
 import com.rest.angular_api.model.response.SingleResult;
+import com.rest.angular_api.model.social.KakaoProfile;
 import com.rest.angular_api.repository.UserJpaRepo;
 import com.rest.angular_api.service.ResponseService;
+import com.rest.angular_api.service.user.KakaoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 
@@ -31,6 +31,7 @@ public class SignController {
     private final JwtTokenProvider jwtTokenProvider;
     private final ResponseService responseService;
     private final PasswordEncoder passwordEncoder;
+    private final KakaoService kakaoService;
 
     /**
      * 로그인 (signin) 메소드
@@ -70,6 +71,17 @@ public class SignController {
                 .build());
 
         return responseService.getSuccessResult();
+    }
+
+    @ApiOperation(value = "소셜 로그인", notes = "소셜 회원 로그인 API")
+    @PostMapping(value = "/signin/{provider}")
+    public SingleResult<String> signInByProvider (
+            @ApiParam(value = "서비스 제공자 provider", required = true, defaultValue = "kakao") @PathVariable String provider,
+            @ApiParam(value = "소설 access token", required = true) @RequestParam String accessToken
+    ) {
+        KakaoProfile profile = kakaoService.getKakaoProfile(accessToken);
+        User user = userJpaRepo.findByUidAndProvider(String.valueOf(profile.getId()), provider).orElseThrow(CUserNotFoundException::new);
+        return responseService.getSingleResult(jwtTokenProvider.createToken(String.valueOf(user.getMsrl()), user.getRoles()));
     }
 
 

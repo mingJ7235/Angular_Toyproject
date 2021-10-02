@@ -1,6 +1,7 @@
 package com.rest.angular_api.advice;
 
 import com.rest.angular_api.advice.exception.CAuthenticationEntryPointException;
+import com.rest.angular_api.advice.exception.CCommunicationException;
 import com.rest.angular_api.advice.exception.CEmailSignInFailedException;
 import com.rest.angular_api.advice.exception.CUserNotFoundException;
 import com.rest.angular_api.model.response.CommonResult;
@@ -62,6 +63,11 @@ public class ExceptionAdvice {
     @ExceptionHandler (AccessDeniedException.class)
     protected CommonResult accessDeniedException (HttpServletRequest request, AccessDeniedException e) {
         return responseService.getFailResult(Integer.valueOf(getMessage("accessDenied.code")), getMessage("accessDenied.msg"));
+    }
+
+    @ExceptionHandler (CCommunicationException.class)
+    protected CommonResult accessDeniedException (HttpServletRequest request, CCommunicationException e) {
+        return responseService.getFailResult(Integer.valueOf(getMessage("communicationError.code")), getMessage("communicationError.msg"));
     }
 
     private String getMessage (String code) {
