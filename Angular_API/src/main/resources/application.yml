@@ -13,5 +13,15 @@ spring :
   messages:
     basename: i18n/exception
     encoding: utf-8
+  social:
+    kakao:
+      client_id: 4ad5abaeeba2fe2e52a8916ec41eb0ce
+      redirect: /social/login/kakao
+      url:
+        login: https://kauth.kakao.com/oauth/authorize
+        token: https://kauth.kakao.com/oauth/token
+        profile: https://kapi.kakao.com/v2/user/me
+  url:
+    base: http://localhost:8080
   jwt:
     secret: govlepel@$&

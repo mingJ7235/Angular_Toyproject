@@ -35,11 +35,14 @@ public class User implements UserDetails {
     private String uid;
 
     @JsonProperty (access = JsonProperty.Access.WRITE_ONLY) //JSON으로 출력안할 데이터이므로 쓰기전용으로 옵션을 바꿔준다.
-    @Column (nullable = false, length = 100)
+    @Column (length = 100)
     private String password;
 
     @Column (nullable = false, length = 100)
     private String name;
+
+    @Column (length = 100)
+    private String provider;
 
     @ElementCollection (fetch = FetchType.EAGER)
     @Builder.Default
