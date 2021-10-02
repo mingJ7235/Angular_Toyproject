@@ -1,0 +1,68 @@
+package com.rest.angular_api.config.security;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
+
+/**
+ * SpringSecurity Configuration
+ * - 서버에 보안 설정을 적용한다.
+ * - 아무나 접근 가능한 리소스는 permitAll()로 세팅하고, 나머지 리소스는 'ROLE_USER' 권한이 필요하다고 명시한다.
+ * - anyRequest().hasRole("USER") 또는 anyRequest().authenticated()는 동일한 동작이다.
+ * - 해당 filter는 UsernamePasswordAuthenticationFilter앞에 설정해야한다.
+ * - SpringSecurity 적용 후에는 모든 리소스에 대한 접근이 제한되므로, Swagger 문서 페이지에 대해서는 예외를 적용해야 접근할 수 있다.
+ */
+
+@RequiredArgsConstructor
+@Configuration
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    private final JwtTokenProvider jwtTokenProvider;
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .httpBasic().disable() //REST API 이므로 기본설정은 사용안한다. 기본설정은 비인증시 로그인폼 화면으로 redirect해주는것이다.
+                .csrf().disable() // REST API 이므로 csrf 보안이 필요없다. disable처리
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) //JWT token으로 인증하므로 세션은 필요없다. 생성안한다. (stateless)
+                .and()
+                    .authorizeRequests() //다음 리퀘스트에 대한 사용권한 체크
+                        .antMatchers("/*/signin", "/*/signup").permitAll() // 가입 및 인증 주소는 누구나 접근 가능
+                        .antMatchers(HttpMethod.GET, "helloworld/**").permitAll() // helloworld로 시작하는 GET 요청 리소스는 누구나 접근 가능
+    }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        super.configure(web);
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
