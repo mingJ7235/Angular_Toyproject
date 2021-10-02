@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 //annotation으로 controller에 security 권한 설정 Controller 내부의 모든 리소스에 대하여 일괄로 동일한 권한을 설정하는 경우 controller 상단에 이렇게 annotation 세팅
 //만약, 리소스별로 다른 권한 설정의 경우, 각각의 메소드 위에 annotation 설정가능
 // annotation으로 권한을 설정한 리소스외 나머지 리소스들은 누구나 접근 가능한 리소스로 설정된다.
-@PreAuthorize("hasRole('ROLE_USER')") //또는 @Secured("ROLE_USER")
+//@PreAuthorize("hasRole('ROLE_USER')") //또는 @Secured("ROLE_USER")
 
 @Api(tags = {"2. User"}) //UserController를 대표하는 최상단 타이틀 영역에 표시될 값을 세팅한다.
 @RequiredArgsConstructor
@@ -40,7 +40,7 @@ public class UserController {
         return responseService.getListResult(userJpaRepo.findAll());
     }
 
-    @PreAuthorize("hasRole(ROLE_ADMIN)")
+    //@PreAuthorize("hasRole(ROLE_ADMIN)")
     @ApiImplicitParams({
             @ApiImplicitParam (name = "X-AUTH-TOKEN", value = "로그인 성공 후 access_token", required = false, dataType = "String", paramType = "header")
     })
