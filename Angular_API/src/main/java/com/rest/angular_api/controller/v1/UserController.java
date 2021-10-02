@@ -5,7 +5,7 @@ import com.rest.angular_api.exception.CUserNotFound;
 import com.rest.angular_api.model.response.CommonResult;
 import com.rest.angular_api.model.response.ListResult;
 import com.rest.angular_api.model.response.SingleResult;
-import com.rest.angular_api.repository.UserJapRepo;
+import com.rest.angular_api.repository.UserJpaRepo;
 import com.rest.angular_api.service.ResponseService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -13,21 +13,19 @@ import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Api(tags = {"1. User"}) //UserController를 대표하는 최상단 타이틀 영역에 표시될 값을 세팅한다.
 @RequiredArgsConstructor
 @RestController
 @RequestMapping (value = "/v1")
 public class UserController {
-    private final UserJapRepo userJapRepo;
+    private final UserJpaRepo userJpaRepo;
     private final ResponseService responseService;
 
     @ApiOperation(value = "회원 조회", notes = "모든 회원 조회 API")
     @GetMapping (value = "/user")
     public ListResult<User> findAllUser () {
 //        return userJapRepo.findAll();
-        return responseService.getListResult(userJapRepo.findAll());
+        return responseService.getListResult(userJpaRepo.findAll());
     }
 
     @ApiOperation(value = "회원 단건 조회", notes = "userId로 회원 조회")
@@ -37,7 +35,7 @@ public class UserController {
             @ApiParam (value = "언어", defaultValue = "ko") @RequestParam String lang
     )
     {
-        return responseService.getSingleResult(userJapRepo.findById(msrl).orElseThrow(CUserNotFound::new));
+        return responseService.getSingleResult(userJpaRepo.findById(msrl).orElseThrow(CUserNotFound::new));
     }
 
     @ApiOperation(value = "회원 입력", notes = "회원 등록 API")
@@ -50,7 +48,7 @@ public class UserController {
                 .uid(uid)
                 .name(name)
                 .build();
-        return userJapRepo.save(user);
+        return userJpaRepo.save(user);
     }
 
     @ApiOperation(value = "회원 수정", notes = "회원 정보 수정 API")
@@ -65,7 +63,7 @@ public class UserController {
                 .uid(uid)
                 .name(name)
                 .build();
-        return responseService.getSingleResult(userJapRepo.save(user));
+        return responseService.getSingleResult(userJpaRepo.save(user));
     }
 
     @ApiOperation(value = "회원 삭제", notes = "user id로 회원 정보 삭제 API")
@@ -73,7 +71,7 @@ public class UserController {
     public CommonResult delete (
             @ApiParam (value = "회원정보", required = true) @PathVariable long msrl
     ) {
-        userJapRepo.deleteById(msrl);
+        userJpaRepo.deleteById(msrl);
         return responseService.getSuccessResult();
     }
 
