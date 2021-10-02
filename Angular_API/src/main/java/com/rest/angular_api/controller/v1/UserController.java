@@ -1,7 +1,7 @@
 package com.rest.angular_api.controller.v1;
 
 import com.rest.angular_api.entity.User;
-import com.rest.angular_api.exception.CUserNotFound;
+import com.rest.angular_api.exception.CUserNotFoundException;
 import com.rest.angular_api.model.response.CommonResult;
 import com.rest.angular_api.model.response.ListResult;
 import com.rest.angular_api.model.response.SingleResult;
@@ -35,7 +35,7 @@ public class UserController {
             @ApiParam (value = "언어", defaultValue = "ko") @RequestParam String lang
     )
     {
-        return responseService.getSingleResult(userJpaRepo.findById(msrl).orElseThrow(CUserNotFound::new));
+        return responseService.getSingleResult(userJpaRepo.findById(msrl).orElseThrow(CUserNotFoundException::new));
     }
 
     @ApiOperation(value = "회원 입력", notes = "회원 등록 API")

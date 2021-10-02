@@ -1,6 +1,7 @@
 package com.rest.angular_api.advice;
 
-import com.rest.angular_api.exception.CUserNotFound;
+import com.rest.angular_api.exception.CEmailSignInFailedException;
+import com.rest.angular_api.exception.CUserNotFoundException;
 import com.rest.angular_api.model.response.CommonResult;
 import com.rest.angular_api.service.ResponseService;
 import lombok.RequiredArgsConstructor;
@@ -41,10 +42,16 @@ public class ExceptionAdvice {
         return responseService.getFailResult(Integer.valueOf(getMessage("unKnown.code")), getMessage("unKnown.msg"));
     }
 
-    @ExceptionHandler (CUserNotFound.class)
+    @ExceptionHandler (CUserNotFoundException.class)
     @ResponseStatus (HttpStatus.INTERNAL_SERVER_ERROR)
-    protected CommonResult userNotFoundException (HttpServletRequest request, CUserNotFound e) {
+    protected CommonResult userNotFoundException (HttpServletRequest request, CUserNotFoundException e) {
         return responseService.getFailResult(Integer.valueOf(getMessage("userNotFound.code")), getMessage("userNotFound.msg"));
+    }
+
+    @ExceptionHandler (CEmailSignInFailedException.class)
+    @ResponseStatus (HttpStatus.INTERNAL_SERVER_ERROR)
+    protected CommonResult emailSignInFailedException (HttpServletRequest request, CUserNotFoundException e) {
+        return responseService.getFailResult(Integer.valueOf(getMessage("emailSignInFailed.code")), getMessage("emailSignInFailed.msg"));
     }
 
     private String getMessage (String code) {

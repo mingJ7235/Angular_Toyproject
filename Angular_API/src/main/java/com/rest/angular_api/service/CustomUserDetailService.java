@@ -1,6 +1,6 @@
 package com.rest.angular_api.service;
 
-import com.rest.angular_api.exception.CUserNotFound;
+import com.rest.angular_api.exception.CUserNotFoundException;
 import com.rest.angular_api.repository.UserJpaRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,7 +15,7 @@ public class CustomUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String userPk) {
-        return userJpaRepo.findById(Long.valueOf(userPk)).orElseThrow(CUserNotFound::new);
+        return userJpaRepo.findById(Long.valueOf(userPk)).orElseThrow(CUserNotFoundException::new);
     }
 
 }
