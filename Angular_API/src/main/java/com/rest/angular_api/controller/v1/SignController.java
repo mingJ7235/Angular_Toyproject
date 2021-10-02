@@ -46,11 +46,11 @@ public class SignController {
         User user = userJpaRepo.findByUid(id).orElseThrow(CEmailSignInFailedException::new);
 
         //저장된 비밀번호와, 입력된 비밀번호가 다를 경우에는 예외발생
-//        if(!passwordEncoder.matches(password, user.getPassword()))
-//            throw new CEmailSignInFailedException();
-        if (!password.equals(user.getPassword())){
+        if(!passwordEncoder.matches(password, user.getPassword()))
             throw new CEmailSignInFailedException();
-        }
+//        if (!password.equals(user.getPassword())){
+//            throw new CEmailSignInFailedException();
+//        }
 
         return responseService.getSingleResult(jwtTokenProvider.createToken(String.valueOf(user.getMsrl()), user.getRoles()));
     }
@@ -64,7 +64,7 @@ public class SignController {
     ) {
         userJpaRepo.save(User.builder()
                 .uid(id)
-                .password(password)
+                .password(passwordEncoder.encode(password))
                 .name(name)
                 .roles(Collections.singletonList("ROLE_USER"))
                 .build());
