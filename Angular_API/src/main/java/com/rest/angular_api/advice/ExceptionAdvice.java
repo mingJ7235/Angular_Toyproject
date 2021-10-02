@@ -1,9 +1,6 @@
 package com.rest.angular_api.advice;
 
-import com.rest.angular_api.advice.exception.CAuthenticationEntryPointException;
-import com.rest.angular_api.advice.exception.CCommunicationException;
-import com.rest.angular_api.advice.exception.CEmailSignInFailedException;
-import com.rest.angular_api.advice.exception.CUserNotFoundException;
+import com.rest.angular_api.advice.exception.*;
 import com.rest.angular_api.model.response.CommonResult;
 import com.rest.angular_api.service.ResponseService;
 import lombok.RequiredArgsConstructor;
@@ -46,28 +43,39 @@ public class ExceptionAdvice {
     }
 
     @ExceptionHandler (CUserNotFoundException.class)
+    @ResponseStatus (HttpStatus.INTERNAL_SERVER_ERROR)
     protected CommonResult userNotFoundException (HttpServletRequest request, CUserNotFoundException e) {
         return responseService.getFailResult(Integer.valueOf(getMessage("userNotFound.code")), getMessage("userNotFound.msg"));
     }
 
     @ExceptionHandler (CEmailSignInFailedException.class)
+    @ResponseStatus (HttpStatus.INTERNAL_SERVER_ERROR)
     protected CommonResult emailSignInFailedException (HttpServletRequest request, CEmailSignInFailedException e) {
         return responseService.getFailResult(Integer.valueOf(getMessage("emailSignInFailed.code")), getMessage("emailSignInFailed.msg"));
 
     }
     @ExceptionHandler (CAuthenticationEntryPointException.class)
+    @ResponseStatus (HttpStatus.INTERNAL_SERVER_ERROR)
     protected CommonResult authenticationEntryPointException (HttpServletRequest request, CAuthenticationEntryPointException e) {
         return responseService.getFailResult(Integer.valueOf(getMessage("entryPointException.code")), getMessage("entryPointException.msg"));
     }
 
     @ExceptionHandler (AccessDeniedException.class)
+    @ResponseStatus (HttpStatus.INTERNAL_SERVER_ERROR)
     protected CommonResult accessDeniedException (HttpServletRequest request, AccessDeniedException e) {
         return responseService.getFailResult(Integer.valueOf(getMessage("accessDenied.code")), getMessage("accessDenied.msg"));
     }
 
     @ExceptionHandler (CCommunicationException.class)
+    @ResponseStatus (HttpStatus.INTERNAL_SERVER_ERROR)
     protected CommonResult accessDeniedException (HttpServletRequest request, CCommunicationException e) {
         return responseService.getFailResult(Integer.valueOf(getMessage("communicationError.code")), getMessage("communicationError.msg"));
+    }
+
+    @ExceptionHandler (CUserExistException.class)
+    @ResponseStatus (HttpStatus.INTERNAL_SERVER_ERROR)
+    protected CommonResult userExistException (HttpServletRequest request, CUserExistException e) {
+        return responseService.getFailResult(Integer.valueOf(getMessage("existingUser.code")), getMessage("existingUser.msg"));
     }
 
     private String getMessage (String code) {
