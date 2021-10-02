@@ -9,13 +9,14 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
  * SpringSecurity Configuration
  * - 서버에 보안 설정을 적용한다.
  * - 아무나 접근 가능한 리소스는 permitAll()로 세팅하고, 나머지 리소스는 'ROLE_USER' 권한이 필요하다고 명시한다.
  * - anyRequest().hasRole("USER") 또는 anyRequest().authenticated()는 동일한 동작이다.
- * - 해당 filter는 UsernamePasswordAuthenticationFilter앞에 설정해야한다.
+ * - 해당 filter (JwtAuthenticationFilter)는 UsernamePasswordAuthenticationFilter 앞에 설정해야한다.
  * - SpringSecurity 적용 후에는 모든 리소스에 대한 접근이 제한되므로, Swagger 문서 페이지에 대해서는 예외를 적용해야 접근할 수 있다.
  */
 
@@ -41,11 +42,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .authorizeRequests() //다음 리퀘스트에 대한 사용권한 체크
                         .antMatchers("/*/signin", "/*/signup").permitAll() // 가입 및 인증 주소는 누구나 접근 가능
                         .antMatchers(HttpMethod.GET, "helloworld/**").permitAll() // helloworld로 시작하는 GET 요청 리소스는 누구나 접근 가능
+                        .anyRequest().hasRole("USER") // 그외 나머지 요청은 모두 인증된 회원만 접근 가능
+                .and()
+                    .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
     }
 
+    //ignore check swagger resource. Swagger 문서에 접근하기 위함
     @Override
     public void configure(WebSecurity web) throws Exception {
-        super.configure(web);
+        web.ignoring().antMatchers(
+                "/v2/api-docs",
+                "/swagger-resources/**",
+                "/swagger-ui.html",
+                "/webjars/**",
+                "/swagger/**"
+        );
     }
 
 }
