@@ -40,6 +40,7 @@ public class UserController {
         return responseService.getListResult(userJpaRepo.findAll());
     }
 
+    @PreAuthorize("hasRole(ROLE_ADMIN)")
     @ApiImplicitParams({
             @ApiImplicitParam (name = "X-AUTH-TOKEN", value = "로그인 성공 후 access_token", required = false, dataType = "String", paramType = "header")
     })
