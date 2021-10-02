@@ -13,7 +13,7 @@ import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-@Api(tags = {"1. User"}) //UserController를 대표하는 최상단 타이틀 영역에 표시될 값을 세팅한다.
+@Api(tags = {"2. User"}) //UserController를 대표하는 최상단 타이틀 영역에 표시될 값을 세팅한다.
 @RequiredArgsConstructor
 @RestController
 @RequestMapping (value = "/v1")
