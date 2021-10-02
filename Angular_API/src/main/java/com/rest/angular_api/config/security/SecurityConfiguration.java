@@ -38,12 +38,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .httpBasic().disable() //REST API 이므로 기본설정은 사용안한다. 기본설정은 비인증시 로그인폼 화면으로 redirect해주는것이다.
                 .csrf().disable() // REST API 이므로 csrf 보안이 필요없다. disable처리
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) //JWT token으로 인증하므로 세션은 필요없다. 생성안한다. (stateless)
+
                 .and()
                     .authorizeRequests() //다음 리퀘스트에 대한 사용권한 체크
                         .antMatchers("/*/signin", "/*/signup").permitAll() // 가입 및 인증 주소는 누구나 접근 가능
-                        .antMatchers(HttpMethod.GET, "helloworld/**").permitAll() // helloworld로 시작하는 GET 요청 리소스는 누구나 접근 가능
-                        .anyRequest().hasRole("USER") // 그외 나머지 요청은 모두 인증된 회원만 접근 가능
+                        .antMatchers(HttpMethod.GET, "/exception/**", "helloworld/**").permitAll() // helloworld로 시작하는 GET 요청 리소스는 누구나 접근 가능
+                    .anyRequest().hasRole("USER") // 그외 나머지 요청은 모두 인증된 회원만 접근 가능
+
                 .and()
+                    .exceptionHandling().authenticationEntryPoint(new CustomAuthenticationEntryPoint())
+
+                .and()
+                    //jwt token 필터를 id/password 인증 필터 전에 넣기
                     .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
     }
 

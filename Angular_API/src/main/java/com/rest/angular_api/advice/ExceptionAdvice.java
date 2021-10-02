@@ -1,7 +1,8 @@
 package com.rest.angular_api.advice;
 
-import com.rest.angular_api.exception.CEmailSignInFailedException;
-import com.rest.angular_api.exception.CUserNotFoundException;
+import com.rest.angular_api.advice.exception.CAuthenticationEntryPointException;
+import com.rest.angular_api.advice.exception.CEmailSignInFailedException;
+import com.rest.angular_api.advice.exception.CUserNotFoundException;
 import com.rest.angular_api.model.response.CommonResult;
 import com.rest.angular_api.service.ResponseService;
 import lombok.RequiredArgsConstructor;
@@ -50,8 +51,14 @@ public class ExceptionAdvice {
 
     @ExceptionHandler (CEmailSignInFailedException.class)
     @ResponseStatus (HttpStatus.INTERNAL_SERVER_ERROR)
-    protected CommonResult emailSignInFailedException (HttpServletRequest request, CUserNotFoundException e) {
+    protected CommonResult emailSignInFailedException (HttpServletRequest request, CEmailSignInFailedException e) {
         return responseService.getFailResult(Integer.valueOf(getMessage("emailSignInFailed.code")), getMessage("emailSignInFailed.msg"));
+
+    }
+    @ExceptionHandler (CAuthenticationEntryPointException.class)
+    @ResponseStatus (HttpStatus.INTERNAL_SERVER_ERROR)
+    protected CommonResult authenticationEntryPointException (HttpServletRequest request, CEmailSignInFailedException e) {
+        return responseService.getFailResult(Integer.valueOf(getMessage("entryPointException.code")), getMessage("entryPointException.msg"));
     }
 
     private String getMessage (String code) {

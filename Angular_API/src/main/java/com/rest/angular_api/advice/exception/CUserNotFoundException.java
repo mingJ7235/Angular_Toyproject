@@ -1,4 +1,4 @@
-package com.rest.angular_api.exception;
+package com.rest.angular_api.advice.exception;
 
 public class CUserNotFoundException extends RuntimeException{
     public CUserNotFoundException(String msg, Throwable t) {

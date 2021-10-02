@@ -2,7 +2,7 @@ package com.rest.angular_api.controller.v1;
 
 import com.rest.angular_api.config.security.JwtTokenProvider;
 import com.rest.angular_api.entity.User;
-import com.rest.angular_api.exception.CEmailSignInFailedException;
+import com.rest.angular_api.advice.exception.CEmailSignInFailedException;
 import com.rest.angular_api.model.response.CommonResult;
 import com.rest.angular_api.model.response.SingleResult;
 import com.rest.angular_api.repository.UserJpaRepo;
@@ -11,6 +11,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,7 @@ import java.util.Collections;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping (value = "/v1")
+@Slf4j
 public class SignController {
 
     private final UserJpaRepo userJpaRepo;
@@ -44,8 +46,11 @@ public class SignController {
         User user = userJpaRepo.findByUid(id).orElseThrow(CEmailSignInFailedException::new);
 
         //저장된 비밀번호와, 입력된 비밀번호가 다를 경우에는 예외발생
-        if( !passwordEncoder.matches(password, user.getPassword()) )
+//        if(!passwordEncoder.matches(password, user.getPassword()))
+//            throw new CEmailSignInFailedException();
+        if (!password.equals(user.getPassword())){
             throw new CEmailSignInFailedException();
+        }
 
         return responseService.getSingleResult(jwtTokenProvider.createToken(String.valueOf(user.getMsrl()), user.getRoles()));
     }

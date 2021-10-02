@@ -1,4 +1,4 @@
-package com.rest.angular_api.exception;
+package com.rest.angular_api.advice.exception;
 
 public class CEmailSignInFailedException extends RuntimeException{
 
