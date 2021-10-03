@@ -18,7 +18,7 @@ import org.springframework.web.client.RestTemplate;
 public class KakaoService {
 
     private final RestTemplate restTemplate;
-    private Environment env;
+    private final Environment env;
     private final Gson gson;
 
     @Value("${spring.url.base}")
