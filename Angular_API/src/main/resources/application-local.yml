@@ -1,0 +1,32 @@
+# com.rest.angular_api package의 하위 로그는 debug level 이상일때 출력되도록한다.
+# 나머지 로그들은 warn level 이상이어야 출력된다.
+logging:
+  level:
+    root: warn
+    com.rest.angular_api: debug
+
+spring:
+  profiles: local
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/angular
+    driver-class-name: org.h2.Driver
+    username: sa
+    jpa:
+      database-platform: org.hibernate.dialect.H2Dialect
+      properties.hibernate.hbm2ddl.auto: update
+      showSql: true
+    messages:
+      basename: i18n/exception
+      encoding: utf-8
+    social:
+      kakao:
+        client_id: 4ad5abaeeba2fe2e52a8916ec41eb0ce
+        redirect: /social/login/kakao
+        url:
+          login: https://kauth.kakao.com/oauth/authorize
+          token: https://kauth.kakao.com/oauth/token
+          profile: https://kapi.kakao.com/v2/user/me
+    url:
+      base: http://localhost:8080
+    jwt:
+      secret: govlepel@$&
