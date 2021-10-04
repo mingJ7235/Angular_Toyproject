@@ -105,6 +105,7 @@ public class SignController {
             throw new CUserExistException();
         }
 
+        //builder -> maiking save JPA
         userJpaRepo.save(User.builder()
                         .uid(uid)
                         .provider(provider)
