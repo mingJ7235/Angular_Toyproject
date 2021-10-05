@@ -1,6 +1,6 @@
 package com.rest.angular_api.controller.v1;
 
-import com.rest.angular_api.entity.User;
+import com.rest.angular_api.entity.member.User;
 import com.rest.angular_api.advice.exception.CUserNotFoundException;
 import com.rest.angular_api.model.response.CommonResult;
 import com.rest.angular_api.model.response.ListResult;
@@ -9,8 +9,6 @@ import com.rest.angular_api.repository.UserJpaRepo;
 import com.rest.angular_api.service.ResponseService;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;

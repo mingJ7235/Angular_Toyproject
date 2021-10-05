@@ -1,6 +1,6 @@
 package com.rest.angular_api.repository;
 
-import com.rest.angular_api.entity.User;
+import com.rest.angular_api.entity.member.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

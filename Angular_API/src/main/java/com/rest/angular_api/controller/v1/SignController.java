@@ -3,7 +3,7 @@ package com.rest.angular_api.controller.v1;
 import com.rest.angular_api.advice.exception.CUserExistException;
 import com.rest.angular_api.advice.exception.CUserNotFoundException;
 import com.rest.angular_api.config.security.JwtTokenProvider;
-import com.rest.angular_api.entity.User;
+import com.rest.angular_api.entity.member.User;
 import com.rest.angular_api.advice.exception.CEmailSignInFailedException;
 import com.rest.angular_api.model.response.CommonResult;
 import com.rest.angular_api.model.response.SingleResult;
@@ -16,7 +16,6 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 

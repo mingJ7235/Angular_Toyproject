@@ -1,4 +1,4 @@
-package com.rest.angular_api.entity;
+package com.rest.angular_api.entity.member;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;

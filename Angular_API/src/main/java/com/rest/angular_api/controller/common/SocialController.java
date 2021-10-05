@@ -52,7 +52,9 @@ public class SocialController {
     /**
      * Kakao 인증 완료 후 리다이렉트 화면
      */
+
     @GetMapping(value = "/kakao")
+
     public ModelAndView redirectKakao (ModelAndView mav, @RequestParam String code) {
         mav.addObject("authInfo", kakaoService.getKakaoTokenInfo(code));
         mav.setViewName("social/redirectKakao");

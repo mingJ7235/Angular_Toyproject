@@ -1,0 +1,55 @@
+package com.rest.angular_api.entity.boards;
+
+import com.rest.angular_api.entity.member.User;
+import com.rest.angular_api.entity.util.CommonDateEntity;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.springframework.security.core.parameters.P;
+
+import javax.persistence.*;
+
+@Entity
+@Getter
+@NoArgsConstructor
+public class Post extends CommonDateEntity {
+    @Id
+    @GeneratedValue
+    private Long postId;
+
+    @Column (nullable = false, length = 50)
+    private String author;
+
+    @Column (nullable = false, length = 100)
+    private String title;
+
+    @Column (length = 500)
+    private String content;
+
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn (name = "board_id")
+    private Board board;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn (name = "msrl")
+    private User user;
+
+    protected Board getBoard() {
+        return board;
+    }
+
+    public Post(String author, String title, String content, Board board, User user) {
+        this.author = author;
+        this.title = title;
+        this.content = content;
+        this.board = board;
+        this.user = user;
+    }
+
+    public Post setUpdate (String author, String title, String content) {
+        this.author = author;
+        this.title = title;
+        this.content = content;
+        return this;
+    }
+
+}
