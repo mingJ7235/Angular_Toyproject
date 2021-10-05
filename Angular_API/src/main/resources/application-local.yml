@@ -2,7 +2,7 @@
 # 나머지 로그들은 warn level 이상이어야 출력된다.
 logging:
   level:
-    root: warn
+    root: info
     com.rest.angular_api: debug
 
 spring:
@@ -11,22 +11,13 @@ spring:
     url: jdbc:h2:tcp://localhost/~/angular
     driver-class-name: org.h2.Driver
     username: sa
-    jpa:
-      database-platform: org.hibernate.dialect.H2Dialect
-      properties.hibernate.hbm2ddl.auto: update
-      showSql: true
-    messages:
-      basename: i18n/exception
-      encoding: utf-8
-    social:
-      kakao:
-        client_id: 4ad5abaeeba2fe2e52a8916ec41eb0ce
-        redirect: /social/login/kakao
-        url:
-          login: https://kauth.kakao.com/oauth/authorize
-          token: https://kauth.kakao.com/oauth/token
-          profile: https://kapi.kakao.com/v2/user/me
-    url:
-      base: http://localhost:8080
-    jwt:
-      secret: govlepel@$&
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    properties.hibernate:
+      hbm2ddl.auto: update
+      format_sql: true
+    showSql: true
+    generate-ddl: true
+  url:
+    base: http://localhost:8080
+

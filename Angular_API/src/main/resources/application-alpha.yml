@@ -1,5 +1,5 @@
 #alpah 설정 환경
-
+#
 logging:
   level:
     root: warn
@@ -11,10 +11,10 @@ logging:
 spring:
   profiles: alpha
   datasource:
-    url: jdbc:mysql://
+    url: jdbc:mysql://127.0.0.1:4577/angularproject?useUnicode=true&autoReconnect=true&characterEncoding=utf8&allowMultiQueries=true&sueSSL=false
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username:
-    password:
+    username: joshua
+    password: 4tkfkdwlrl@
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     properties.hibernate:

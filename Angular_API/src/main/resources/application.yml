@@ -1,17 +1,6 @@
-server :
-  port: 8080
-
 spring :
   profiles:
     active: local # default 환경
-  datasource:
-    url: jdbc:h2:tcp://localhost/~/angular
-    driver-class-name: org.h2.Driver
-    username : sa
-  jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
-    properties.hibernate.hbm2ddl.auto: update
-    showSql: true
   messages:
     basename: i18n/exception
     encoding: utf-8
@@ -23,7 +12,5 @@ spring :
         login: https://kauth.kakao.com/oauth/authorize
         token: https://kauth.kakao.com/oauth/token
         profile: https://kapi.kakao.com/v2/user/me
-  url:
-    base: http://localhost:8080
   jwt:
     secret: govlepel@$&
