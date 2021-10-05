@@ -1,6 +1,8 @@
 package com.rest.angular_api.entity.member;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.rest.angular_api.entity.util.CommonDateEntity;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -25,8 +27,9 @@ import java.util.stream.Collectors;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties ({"hibernateLazyInitializer", "handler"}) // Post Entity에서 user와의 관계를 Json으로 변환시 오류 방지
 @Table(name = "user")
-public class User implements UserDetails {
+public class User extends CommonDateEntity implements UserDetails {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long msrl;
