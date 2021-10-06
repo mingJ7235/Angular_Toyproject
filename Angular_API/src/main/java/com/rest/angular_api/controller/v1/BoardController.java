@@ -1,6 +1,8 @@
 package com.rest.angular_api.controller.v1;
 
 import com.rest.angular_api.entity.boards.Board;
+import com.rest.angular_api.entity.boards.Post;
+import com.rest.angular_api.model.response.ListResult;
 import com.rest.angular_api.model.response.SingleResult;
 import com.rest.angular_api.service.ResponseService;
 import com.rest.angular_api.service.board.BoardService;
@@ -26,6 +28,14 @@ public class BoardController {
     public SingleResult<Board> boardInfo (@PathVariable String boardName) {
         return responseService.getSingleResult(boardService.findBoard(boardName));
     }
+
+    @ApiOperation(value = "게시판 글 리스트", notes = "게시판 게시글 리스트를 조회한다. ")
+    @GetMapping(value = "/{boardName}/posts")
+    public ListResult<Post> posts (@PathVariable String boardName) {
+        return responseService.getListResult(boardService.findPosts(boardName));
+    }
+
+
 
 
 

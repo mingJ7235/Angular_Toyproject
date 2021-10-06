@@ -10,9 +10,7 @@ import com.rest.angular_api.model.board.ParamsPost;
 import com.rest.angular_api.repository.BoardJpaRepo;
 import com.rest.angular_api.repository.PostJpaRepo;
 import com.rest.angular_api.repository.UserJpaRepo;
-import javafx.scene.chart.BarChart;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
