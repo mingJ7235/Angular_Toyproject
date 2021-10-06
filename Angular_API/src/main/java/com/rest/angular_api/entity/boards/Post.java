@@ -37,7 +37,7 @@ public class Post extends CommonDateEntity {
         return board;
     }
 
-    public Post(String author, String title, String content, Board board, User user) {
+    public Post(User user, Board board, String author, String title, String content) {
         this.author = author;
         this.title = title;
         this.content = content;
