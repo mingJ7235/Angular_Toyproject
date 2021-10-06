@@ -76,7 +76,21 @@ public class ExceptionAdvice {
     @ResponseStatus (HttpStatus.INTERNAL_SERVER_ERROR)
     protected CommonResult userExistException (HttpServletRequest request, CUserExistException e) {
         return responseService.getFailResult(Integer.valueOf(getMessage("existingUser.code")), getMessage("existingUser.msg"));
+
     }
+
+    @ExceptionHandler (CNotOwnerException.class)
+    @ResponseStatus (HttpStatus.NON_AUTHORITATIVE_INFORMATION)
+    public CommonResult notOwnerException (HttpServletRequest request, CNotOwnerException e) {
+        return responseService.getFailResult(Integer.valueOf(getMessage("notOwner.code")), getMessage("notOwner.msg"));
+    }
+
+    @ExceptionHandler (CResourceNotExistException.class)
+    @ResponseStatus (HttpStatus.NOT_FOUND)
+    public CommonResult resourceNotExistException (HttpServletRequest request, CResourceNotExistException e) {
+        return responseService.getFailResult(Integer.valueOf(getMessage("resourceNotExist.code")), getMessage("resourceNotExist.msg"));
+    }
+
 
     private String getMessage (String code) {
         return getMessage(code, null);
