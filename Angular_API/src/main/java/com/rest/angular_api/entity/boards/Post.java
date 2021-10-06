@@ -7,11 +7,12 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.parameters.P;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Getter
 @NoArgsConstructor
-public class Post extends CommonDateEntity {
+public class Post extends CommonDateEntity implements Serializable {
     @Id
     @GeneratedValue
     private Long postId;
