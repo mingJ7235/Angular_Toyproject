@@ -6,21 +6,38 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './modules/material/material.module'
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { HomeComponent } from './component/home.component'
+import { HomeComponent } from './component/home.component';
+import { SigninComponent } from './component/signin.component';
+import { SignupComponent } from './component/signup.component'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    SigninComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    FormsModule,
+    ReactiveFormsModule,
+    // 외부 api와 통신하기 위해 필요한 HttpClientModule
+    HttpClientModule 
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  exports:[
+    ReactiveFormsModule
+  ],
+  providers: [
+
+  ],
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }
