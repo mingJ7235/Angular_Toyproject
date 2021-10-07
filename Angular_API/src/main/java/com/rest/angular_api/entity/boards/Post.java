@@ -34,10 +34,6 @@ public class Post extends CommonDateEntity implements Serializable {
     @JoinColumn (name = "msrl")
     private User user;
 
-    protected Board getBoard() {
-        return board;
-    }
-
     public Post(User user, Board board, String author, String title, String content) {
         this.author = author;
         this.title = title;
