@@ -16,19 +16,20 @@
                 </p>
 
                 <p *ngIf="id?.touched && id?.invalid && id?.errors?.required" class="error">
-                    Id is required
+                    이메일을 입력해주세요
                 </p>
 
                 <p *ngIf="id?.touched && id?.invalid && id?.errors?.email" class="error">
-                    Please enter valid email 
+                    부적절한 이메일 주소 입니다.  
                 </p>
 
                 <p *ngIf="password?.touched && password?.invalid && password?.errors?.required" class="error">
-                    Password is required
+                    비밀번호를 입력해주세요
                 </p>
 
                 <div class = "button">
-                    <button type = "submit" mat-stroked-button [disabled]="!signInForm.valid">Login</button>
+                    <button type = "submit" mat-stroked-button [disabled]="!signInForm.valid">로그인</button>
+                    <button mat-raised-button color="primary" routerLink="/signup">회원가입</button>
                 </div>
             </form>
         </mat-card-content>
