@@ -1,1 +1,18 @@
-<p>signup works!</p>
+<div class="wrapper">
+    <mat-card>
+        <mat-card-title>Sign up</mat-card-title>
+        <form [formGroup]="signUpForm" (ngSubmit)="submit()">
+
+            <p>
+                <mat-form-field>
+                    <input type="text" matInput placeholder="Email" formControlName ="id">
+                </mat-form-field>
+            </p>
+
+            <p>
+                
+            </p>
+
+        </form>
+    </mat-card>
+</div>
