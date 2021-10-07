@@ -12,13 +12,17 @@ import { SignupComponent } from './component/member/signup.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SignService } from './service/rest-api/sign.service';
+import { LogoutComponent } from './component/logout/logout.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     SigninComponent,
-    SignupComponent
+    SignupComponent,
+    LogoutComponent,
+
   ],
   imports: [
     BrowserModule,
