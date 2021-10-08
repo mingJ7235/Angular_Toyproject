@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SignService } from './service/rest-api/sign.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-toyproject';
+
+  constructor (
+    public signService : SignService
+  ){}
 }

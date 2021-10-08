@@ -18,7 +18,7 @@
               <mat-icon class="icon">dashboard</mat-icon>
               <span class="label">게시판</span>
             </a>
-            <a mat-list-item>
+            <a mat-list-item *ngIf="signService.isSignIn()" href="/logout">
               <mat-icon class="icon">input</mat-icon>
               <span class="label">로그아웃</span>
             </a>
@@ -57,8 +57,8 @@
                     <span class="label">게시판</span>
                   </a>
                 </li>
-                <li>
-                  <a>
+                <li *ngIf="signService.isSignIn()">
+                  <a href="/logout">
                     <mat-icon class="icon">input</mat-icon>
                     <span class="label">로그아웃</span>
                   </a>
