@@ -11,10 +11,10 @@ logging:
 spring:
   profiles: alpha
   datasource:
-    url: jdbc:mysql://127.0.0.1:4577/angularproject?useUnicode=true&autoReconnect=true&characterEncoding=utf8&allowMultiQueries=true&sueSSL=false
+    url: jdbc:mysql://fullstack-maria-db.cqn5x65cmexd.ap-northeast-2.rds.amazonaws.com:3306/FullstackDB?useUnicode=true&autoReconnect=true&characterEncoding=utf8&allowMultiQueries=true&sueSSL=false
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: joshua
-    password: ###
+    password: 4tkfkdwlrl
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     properties.hibernate:
@@ -22,5 +22,5 @@ spring:
       format_sql: true
     showSql: true
     generate-ddl: false
-  url:
-    base : http://alpha.mj.org
+#  url:
+#    base : http://alpha.mj.org
