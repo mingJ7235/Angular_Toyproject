@@ -4,6 +4,8 @@ build/classes
 build/generated
 build/resources
 build/tmp
+build/reports
+build/test-results
 
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
