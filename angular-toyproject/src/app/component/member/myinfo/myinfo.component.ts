@@ -1,3 +1,4 @@
+import { MyinfoService } from './../../../service/rest-api/myinfo.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/model/myinfo/User';
 
@@ -10,8 +11,10 @@ export class MyinfoComponent implements OnInit {
 
   loginUser : User;
 
-  constructor() {
-    this.loginUser = 
+  constructor(private myInfoService: MyinfoService) {
+    this.myInfoService.getUser().then(user =>{
+      this.loginUser = user;
+    })
    }
 
   ngOnInit(): void {
