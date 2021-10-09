@@ -10,6 +10,7 @@ export class LogoutComponent implements OnInit {
 
   constructor(private router: Router) {
     localStorage.removeItem('x-auth-token');
+    localStorage.removeItem('loginUser')
     this.router.navigate(['/']);
   }
 

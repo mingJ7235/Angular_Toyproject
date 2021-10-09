@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Proxy(lazy = false) //Redis 캐싱시 오류가 발생할수 있기때문에 선언한다.
+//@Proxy(lazy = false) //Redis 캐싱시 오류가 발생할수 있기때문에 선언한다.
 @JsonIgnoreProperties ({"hibernateLazyInitializer", "handler"}) // Post Entity에서 user와의 관계를 Json으로 변환시 오류 방지
 @Table(name = "user")
 public class User extends CommonDateEntity implements UserDetails {

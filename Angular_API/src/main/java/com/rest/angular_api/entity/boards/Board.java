@@ -3,7 +3,6 @@ package com.rest.angular_api.entity.boards;
 import com.rest.angular_api.entity.util.CommonDateEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Value;
 
 import javax.persistence.*;
 import java.io.Serializable;

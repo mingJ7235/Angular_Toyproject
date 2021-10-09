@@ -29,7 +29,7 @@ public class CustomUserDetailService implements UserDetailsService {
      *       여기서는 메서드의 인자인 userPk를 선언한다.
      * unless = "#result == null" 은 메서드 결과가 null이 아닌경우에만 캐싱하도록 하는 옵션이다.
      */
-    @Cacheable(value = redisConfig.CacheKey.USER, key = "#userPk", unless = "#result == null")
+    //@Cacheable(value = redisConfig.CacheKey.USER, key = "#userPk", unless = "#result == null")
     public UserDetails loadUserByUsername(String userPk) {
         return userJpaRepo.findById(Long.valueOf(userPk)).orElseThrow(CUserNotFoundException::new);
     }

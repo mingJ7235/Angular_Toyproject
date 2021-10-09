@@ -4,7 +4,6 @@ import com.rest.angular_api.entity.member.User;
 import com.rest.angular_api.entity.util.CommonDateEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.parameters.P;
 
 import javax.persistence.*;
 import java.io.Serializable;
