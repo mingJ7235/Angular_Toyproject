@@ -11,7 +11,7 @@ logging:
 spring:
   profiles: alpha
   datasource:
-    url: jdbc:mysql://fullstack-maria-db.cqn5x65cmexd.ap-northeast-2.rds.amazonaws.com:3306/FullstackDB?useUnicode=true&autoReconnect=true&characterEncoding=utf8&allowMultiQueries=true&sueSSL=false
+    url: jdbc:mariadb://fullstack-maria-db.cqn5x65cmexd.ap-northeast-2.rds.amazonaws.com:3306/FullstackDB?useUnicode=true&autoReconnect=true&characterEncoding=utf8&allowMultiQueries=true&sueSSL=false
     driver-class-name: org.mariadb.jdbc.Driver
     username: joshua
     password: ###

@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SignService } from './service/rest-api/sign.service';
 import { LogoutComponent } from './component/logout/logout.component';
+import { MyinfoComponent } from './component/member/myinfo/myinfo.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { LogoutComponent } from './component/logout/logout.component';
     SigninComponent,
     SignupComponent,
     LogoutComponent,
+    MyinfoComponent,
 
   ],
   imports: [
