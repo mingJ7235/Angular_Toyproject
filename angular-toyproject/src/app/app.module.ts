@@ -15,6 +15,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SignService } from './service/rest-api/sign.service';
 import { LogoutComponent } from './component/logout/logout.component';
 import { MyinfoComponent } from './component/member/myinfo/myinfo.component';
+import { MyinfoService } from './service/rest-api/myinfo.service';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { MyinfoComponent } from './component/member/myinfo/myinfo.component';
       useClass : HttpRequestInterceptorService,
       multi : true,
     }, 
-    SignService
+    SignService,
+    MyinfoService
   ],
   bootstrap: [
     AppComponent
