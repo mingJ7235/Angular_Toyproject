@@ -1,3 +1,4 @@
+import { HttpRequestInterceptorService } from './service/rest-api/common/http-request-interceptor.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -10,7 +11,7 @@ import { HomeComponent } from './component/home.component';
 import { SigninComponent } from './component/member/signin.component';
 import { SignupComponent } from './component/member/signup.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SignService } from './service/rest-api/sign.service';
 import { LogoutComponent } from './component/logout/logout.component';
 import { MyinfoComponent } from './component/member/myinfo/myinfo.component';
@@ -41,6 +42,12 @@ import { MyinfoComponent } from './component/member/myinfo/myinfo.component';
     ReactiveFormsModule
   ],
   providers: [
+    // 인터셉터 등록 : 인터셉터가 http 요청마다 적용되게 하기 위해서 provider에 추가 
+    {
+      provide : HTTP_INTERCEPTORS,
+      useClass : HttpRequestInterceptorService,
+      multi : true,
+    }, 
     SignService
   ],
   bootstrap: [
