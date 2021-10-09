@@ -16,6 +16,7 @@ import { SignService } from './service/rest-api/sign.service';
 import { LogoutComponent } from './component/logout/logout.component';
 import { MyinfoComponent } from './component/member/myinfo/myinfo.component';
 import { MyinfoService } from './service/rest-api/myinfo.service';
+import { BoardComponent } from './component/board/board.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { MyinfoService } from './service/rest-api/myinfo.service';
     SignupComponent,
     LogoutComponent,
     MyinfoComponent,
+    BoardComponent,
 
   ],
   imports: [

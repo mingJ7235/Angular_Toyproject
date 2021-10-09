@@ -10,26 +10,6 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-// export class HttpRequestInterceptorService implements HttpInterceptor {
-
-//   /**
-//    * Interceptor는 http 요청을 중간에 가로채서 header에 추가 정보를 세팅하는 역할을 한다.
-//    * localstorage에 저장된 token이 있으면 header에 x-auth-token값을 세팅한다. 
-//    */
-//   intercept(req: HttpRequest<any>, next: HttpHandler) : Observable<HttpEvent<any>> {
-//     var token = localStorage.getItem('x-auth-token');
-//     var reqHeader: HttpHeaders = req.headers;
-//     if (token) {
-//       reqHeader = reqHeader.set('x-auth-token', token);
-//     }
-//     const newRequest = req.clone({headers: reqHeader});
-//     return next.handle(newRequest);
-//   }
-
-//   constructor() { }
-// }
-
-// http-request-interceptor.service.ts
 export class HttpRequestInterceptorService  implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     var token = localStorage.getItem('x-auth-token');
