@@ -1,10 +1,8 @@
 package com.rest.angular_api.service;
 
 import com.rest.angular_api.advice.exception.CUserNotFoundException;
-import com.rest.angular_api.config.redis.redisConfig;
 import com.rest.angular_api.repository.UserJpaRepo;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;

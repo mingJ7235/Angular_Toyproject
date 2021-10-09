@@ -3,7 +3,6 @@ package com.rest.angular_api.service.board;
 import com.rest.angular_api.advice.exception.CNotOwnerException;
 import com.rest.angular_api.advice.exception.CResourceNotExistException;
 import com.rest.angular_api.advice.exception.CUserNotFoundException;
-import com.rest.angular_api.config.redis.redisConfig;
 import com.rest.angular_api.entity.boards.Board;
 import com.rest.angular_api.entity.boards.Post;
 import com.rest.angular_api.entity.member.User;
@@ -11,10 +10,7 @@ import com.rest.angular_api.model.board.ParamsPost;
 import com.rest.angular_api.repository.BoardJpaRepo;
 import com.rest.angular_api.repository.PostJpaRepo;
 import com.rest.angular_api.repository.UserJpaRepo;
-import com.rest.angular_api.service.CacheService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,16 +36,16 @@ public class BoardService {
     private final BoardJpaRepo boardJpaRepo;
     private final PostJpaRepo postJpaRepo;
     private final UserJpaRepo userJpaRepo;
-    private final CacheService cacheService;
+    //private final CacheService cacheService;
 
     //게시판 이름으로 게시판 조회
-    @Cacheable (value = redisConfig.CacheKey.BOARD, key = "#boardName", unless = "#result == null")
+    //@Cacheable (value = redisConfig.CacheKey.BOARD, key = "#boardName", unless = "#result == null")
     public Board findBoard (String boardName) {
         return Optional.ofNullable(boardJpaRepo.findByName(boardName)).orElseThrow(CResourceNotExistException::new);
     }
 
     //게시판 이름으로 게시물 리스트 조회
-    @Cacheable(value = redisConfig.CacheKey.POSTS, key = "#boardName", unless = "#result == null")
+    //@Cacheable(value = redisConfig.CacheKey.POSTS, key = "#boardName", unless = "#result == null")
     public List<Post> findPosts (String boardName) {
         return postJpaRepo.findByBoard(findBoard(boardName));
     }
@@ -65,7 +61,7 @@ public class BoardService {
      * 하지만 writePost 메소드는 게시글 1건 등록할경우, 게시글 리스트 캐시를 초기화해야하므로 CacheEvict를 사용하여 캐시를 삭제해야한다. (게시물이 등록하면 달라지니까 초기화해야함)
      *
      */
-    @CacheEvict (value = redisConfig.CacheKey.POSTS, key = "#boardName")
+    //@CacheEvict (value = redisConfig.CacheKey.POSTS, key = "#boardName")
     //게시물등록
     public Post writePost (String uid, String boardName, ParamsPost paramsPost) {
         Board board = boardJpaRepo.findByName(boardName);
@@ -98,7 +94,7 @@ public class BoardService {
             throw new CNotOwnerException();
         }
         post.setUpdate(paramsPost.getAuthor(), paramsPost.getTitle(), paramsPost.getContent());
-        cacheService.deleteBoardCache(post.getPostId(), post.getBoard().getName());
+        //cacheService.deleteBoardCache(post.getPostId(), post.getBoard().getName());
         return post;
     }
 
@@ -117,7 +113,7 @@ public class BoardService {
             throw new CNotOwnerException();
         }
         postJpaRepo.delete(post);
-        cacheService.deleteBoardCache(post.getPostId(), post.getBoard().getName());
+        //cacheService.deleteBoardCache(post.getPostId(), post.getBoard().getName());
         return true;
     }
 

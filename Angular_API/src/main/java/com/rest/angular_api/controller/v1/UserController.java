@@ -29,7 +29,7 @@ public class UserController {
 
     //@Secured("ROLE_USER") 각각의 리소스마다 security권한을 설정해야하면 해당 메서드 위에 이렇게 annotation 세팅
     @ApiImplicitParams({
-            @ApiImplicitParam (name = "X-AUTH-TOKEN", value = "로그인 성공 후 access_token", required = true, dataType = "String", paramType = "header")
+            @ApiImplicitParam (name = "x-auto-token", value = "로그인 성공 후 access_token", required = true, dataType = "String", paramType = "header")
     })
     @ApiOperation(value = "회원 조회", notes = "모든 회원 조회 API")
     @GetMapping (value = "/users")
@@ -40,12 +40,12 @@ public class UserController {
 
     //@PreAuthorize("hasRole(ROLE_ADMIN)")
     @ApiImplicitParams({
-            @ApiImplicitParam (name = "X-AUTH-TOKEN", value = "로그인 성공 후 access_token", required = false, dataType = "String", paramType = "header")
+            @ApiImplicitParam (name = "x-auto-token", value = "로그인 성공 후 access_token", required = true, dataType = "String", paramType = "header")
     })
     @ApiOperation(value = "회원 단건 조회", notes = "회원번호 (msrl) 로 회원 조회")
     @GetMapping(value = "/user")
     public SingleResult<User> findUserById (
-            @ApiParam (value = "언어", defaultValue = "ko") @RequestParam String lang
+           // @ApiParam (value = "언어", defaultValue = "ko") @RequestParam String lang
     )
     {
         //SecurityContext에서 인증받은 회원의 정보를 얻어온다.
@@ -58,7 +58,7 @@ public class UserController {
     }
 
     @ApiImplicitParams({
-            @ApiImplicitParam (name = "X-AUTH-TOKEN", value = "로그인 성공 후 access_token", required = true, dataType = "String", paramType = "header")
+            @ApiImplicitParam (name = "x-auto-token", value = "로그인 성공 후 access_token", required = true, dataType = "String", paramType = "header")
     })
     @ApiOperation(value = "회원 수정", notes = "회원 정보 수정 API")
     @PutMapping (value = "/user")
@@ -74,7 +74,7 @@ public class UserController {
     }
 
     @ApiImplicitParams({
-            @ApiImplicitParam (name = "X-AUTH-TOKEN", value = "로그인 성공 후 access_token", required = true, dataType = "String", paramType = "header")
+            @ApiImplicitParam (name = "x-auto-token", value = "로그인 성공 후 access_token", required = true, dataType = "String", paramType = "header")
     })
     @ApiOperation(value = "회원 삭제", notes = "user id로 회원 정보 삭제 API")
     @DeleteMapping (value = "/user/{msrl}")

@@ -20,10 +20,13 @@ export class MyinfoService {
   getUser(): Promise<User> {
     const loginUser = JSON.parse(localStorage.getItem('loginUser'));
     if(loginUser == null) {
+      console.log('들어오나1' + loginUser);
+      
       return this.http.get<ApiResponseSingle>(this.getUserUrl)
-        .toPromise()
-        .then(this.apiValidationService.validateResponse)
-        .then(response => {
+      .toPromise()
+      .then(this.apiValidationService.validateResponse)
+      .then(response => {
+          console.log('들어오나2');
           localStorage.setItem('loginUser', JSON.stringify(response.data));
           return response.data as User;
         })

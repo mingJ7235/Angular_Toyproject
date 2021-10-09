@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Entity
 @Getter
 @NoArgsConstructor
-public class Post extends CommonDateEntity implements Serializable {
+public class Post extends CommonDateEntity /*implements Serializable*/ {
     @Id
     @GeneratedValue
     private Long postId;
