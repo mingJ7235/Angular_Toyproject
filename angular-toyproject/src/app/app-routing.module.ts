@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BoardComponent } from './component/board/board.component';
 import { HomeComponent } from './component/home.component';
 import { LogoutComponent } from './component/logout/logout.component';
 import { MyinfoComponent } from './component/member/myinfo/myinfo.component';
@@ -12,7 +13,9 @@ const routes: Routes = [
   {path: 'signin', component: SigninComponent},
   {path: 'signup', component: SignupComponent},
   {path: 'logout', component: LogoutComponent},
-  {path: 'myinfo', component: MyinfoComponent, canActivate: [AuthGuard]}
+  {path: 'myinfo', component: MyinfoComponent, canActivate: [AuthGuard]},
+  {path: 'boards', component: BoardComponent}
+
 ];
 
 @NgModule({
