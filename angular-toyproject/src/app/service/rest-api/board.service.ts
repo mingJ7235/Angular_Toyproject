@@ -13,4 +13,6 @@ export class BoardService {
   ) { }
 
   private getBoardUrl = 'api/v1/board'
+
+  
 }

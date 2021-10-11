@@ -12,6 +12,7 @@ import { MatTableModule } from '@angular/material/table'
 import { MatInputModule } from '@angular/material/input'
 import { MatDialogModule } from '@angular/material/dialog'
 import { MatSliderModule } from '@angular/material/slider'
+import { MatTable } from '@angular/material/table';
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import { MatSliderModule } from '@angular/material/slider'
     MatInputModule,
     MatButtonModule,
     MatTableModule,
+    //MatTable,
     MatSidenavModule,
     MatToolbarModule,
     MatIconModule,
@@ -32,6 +34,7 @@ import { MatSliderModule } from '@angular/material/slider'
     MatInputModule,
     MatButtonModule,
     MatTableModule,
+    //MatTable,
     MatSidenavModule,
     MatToolbarModule,
     MatIconModule,

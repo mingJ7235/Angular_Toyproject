@@ -1,8 +1,58 @@
 <div class="wrapper">
-    <mat-card>
-        <mat-card-title>
-            
+    <mat-card class="card">
+        <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
+            <div>
+                <h3>자유 게시판</h3>
+                <button mat-raised-button color="primary">
+                    <mat-icon>add</mat-icon> Add Post
+                </button>
+            </div>
         </mat-card-title>
+
+        <mat-card-content>
+            <div class="container">
+                <!-- 
+                    mat-table (Material Table) 은 데이터를 표현하는 방식이 조금 특이하다.
+                        - 리스트 정보를 루프를 돌면서 추가하지 않고, dataSource에 주입을 한다.
+                        - 리스트 컬럼마다 매핑되는 데이터의 id를 지정한다 (matColumnDef="매핑 ID 정보")
+                        - 리스트에 보여지는 데이터의 순서를 매핑 ID기준으로 세팅한다. 
+                 -->
+                <table mat-table [dataSource]="posts">
+                    <ng-container matColumnDef="postId">
+                        <mat-header-cell *matHeaderCellDef>no.</mat-header-cell>
+                        <mat-cell *matCellDef="let element" class="column-center">{{element.postId}}</mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="title">
+                        <mat-header-cell *matHeaderCellDef>제목</mat-header-cell>
+                        <mat-cell *matCellDef="let element">{{element.title}}</mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="author">
+                        <mat-header-cell *matHeaderCellDef>작성자</mat-header-cell>
+                        <mat-cell *matCellDef="let element" class="column-center">{{element.author}}</mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="createdAt">
+                        <mat-header-cell *matHeaderCellDef>작성일</mat-header-cell>
+                        <mat-cell *matCellDef="let element" class="column-center">{{element.createdAt | date : 'yyyy-MM-dd HH:mm'}}</mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="modifiedAt">
+                        <mat-header-cell *matHeaderCellDef>수정</mat-header-cell>
+                        <mat-cell *matCellDef="let element" class="column-center">
+                            <mat-icon class="icon">edit</mat-icon>
+                            <mat-icon class="icon">delete_forever</mat-icon>
+                        </mat-cell>
+                    </ng-container>
+                    <mat-header-row *matHeaderRowDef="headerColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: headerColumns;"></mat-row>
+                </table>
+                <div *ngIf="posts.length ===0" class="no-content">
+                    등록된 게시글이 없습니다. 
+                </div>
+            </div>
+        </mat-card-content>
     </mat-card>
 
 </div>
