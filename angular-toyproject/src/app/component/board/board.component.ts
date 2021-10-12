@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from 'src/app/model/board/Post';
+import { User } from 'src/app/model/myinfo/User';
 import { BoardService } from 'src/app/service/rest-api/board.service';
+import { MyinfoService } from 'src/app/service/rest-api/myinfo.service';
+import { SignService } from 'src/app/service/rest-api/sign.service';
 
 @Component({
   selector: 'app-board',
@@ -13,6 +16,7 @@ export class BoardComponent implements OnInit {
   posts: Post[] = [];
   displayedColumns : string[] = ['postId', 'title', 'author', 'createdAt', 'modifiedAt'];
   boardName: string;
+  loginUser : User;
 
   /**
    * 게시판 주소로부터 게시판 이름 (boardName)이 Path variable로 넘어오게 되는데,
@@ -20,14 +24,25 @@ export class BoardComponent implements OnInit {
    */
   constructor(
     private boardService: BoardService,
-    private route : ActivatedRoute) { 
+    private route : ActivatedRoute,
+    private signService : SignService,
+    private myInfoService : MyinfoService,
+    private router : Router
+    
+    ) { 
       this.boardName = this.route.snapshot.params['boardName'];
     }
 
   ngOnInit(): void {
     this.boardService.getPosts(this.boardName).then(response => {
       this.posts =response;
-    })
+    });
+    if (this.signService.isSignIn()) {
+      this.myInfoService.getUser()
+        .then(user => {
+          this.loginUser = user;
+        })
+    }
   }
 
 }

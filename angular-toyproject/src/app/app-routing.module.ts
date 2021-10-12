@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BoardComponent } from './component/board/board.component';
+import { PostModifyComponent } from './component/board/post-modify.component';
 import { PostViewComponent } from './component/board/post-view.component';
 import { PostComponent } from './component/board/post.component';
 import { HomeComponent } from './component/home.component';
@@ -18,7 +19,8 @@ const routes: Routes = [
   {path: 'myinfo', component: MyinfoComponent, canActivate: [AuthGuard]},
   {path: 'board/:boardName', component: BoardComponent},
   {path: 'board/:boardName/post', component: PostComponent, canActivate: [AuthGuard]},
-  {path: 'board/:boardName/post/:postId', component: PostViewComponent}
+  {path: 'board/:boardName/post/:postId', component: PostViewComponent},
+  {path: 'board/:boardName/post/:postId/modify', component: PostModifyComponent, canActivate: [AuthGuard]}
 
 ];
 
