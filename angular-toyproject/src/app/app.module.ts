@@ -20,6 +20,7 @@ import { BoardComponent } from './component/board/board.component';
 import { BoardService } from './service/rest-api/board.service';
 import { PostComponent } from './component/board/post.component';
 import { PostViewComponent } from './component/board/post-view.component';
+import { PostModifyComponent } from './component/board/post-modify.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { PostViewComponent } from './component/board/post-view.component';
     BoardComponent,
     PostComponent,
     PostViewComponent,
+    PostModifyComponent,
 
   ],
   imports: [
