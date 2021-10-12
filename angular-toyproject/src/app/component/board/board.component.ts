@@ -25,7 +25,7 @@ export class BoardComponent implements OnInit {
   constructor(
     private boardService: BoardService,
     private route : ActivatedRoute,
-    private signService : SignService,
+    public signService : SignService,
     private myInfoService : MyinfoService,
     private router : Router
     

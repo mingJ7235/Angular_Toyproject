@@ -21,7 +21,7 @@ export class PostViewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private boardService : BoardService,
-    private signService : SignService,
+    public signService : SignService,
     private myInfoService : MyinfoService) { 
       /**
        * constructor에서 path variable로 넘어온 boardName과 postId를 얻는다. 

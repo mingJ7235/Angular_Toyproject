@@ -28,8 +28,10 @@
 </mat-card>
 
 <div class="button">
-    <button mat-stroked-button color="primary">리스트</button>
-    <button mat-raised-button color="primary">수정</button>
+    <button mat-stroked-button color="primary" [routerLink]="['/board', boardName]">리스트</button>
+    <button mat-raised-button color="primary" 
+        *ngIf="signService.isSignIn() && loginUser?.msrl == post?.user.msrl"
+        [routerLink]="['/board', boardName, 'post', post?.postId, 'modify']">수정</button>
 </div>
 
 
