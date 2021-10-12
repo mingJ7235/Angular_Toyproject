@@ -19,6 +19,7 @@ import { MyinfoService } from './service/rest-api/myinfo.service';
 import { BoardComponent } from './component/board/board.component';
 import { BoardService } from './service/rest-api/board.service';
 import { PostComponent } from './component/board/post.component';
+import { PostViewComponent } from './component/board/post-view.component';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { PostComponent } from './component/board/post.component';
     MyinfoComponent,
     BoardComponent,
     PostComponent,
+    PostViewComponent,
 
   ],
   imports: [

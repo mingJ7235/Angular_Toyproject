@@ -3,7 +3,7 @@
         <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
             <div>
                 <h3>자유 게시판</h3>
-                <button mat-raised-button color="primary">
+                <button mat-raised-button color="primary" [routerLink]="['/board',boardName, 'post']">
                     <mat-icon>add</mat-icon> Add Post
                 </button>
             </div>

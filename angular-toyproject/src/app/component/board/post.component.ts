@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BoardService } from 'src/app/service/rest-api/board.service';
+import { MyinfoService } from 'src/app/service/rest-api/myinfo.service';
+import { SignService } from 'src/app/service/rest-api/sign.service';
 
 @Component({
   selector: 'app-post',
@@ -20,7 +23,11 @@ export class PostComponent implements OnInit {
   constructor(
     private router: Router,
     private route : ActivatedRoute,
-    private formBuilder : FormBuilder
+    private formBuilder : FormBuilder,
+
+    private signService : SignService,
+    private myInfoService : MyinfoService,
+    private boardService : BoardService
 
   ) { 
     this.postForm = this.formBuilder.group({
@@ -38,8 +45,19 @@ export class PostComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  submit() :void {
-    
+  submit() {
+    if(this.signService.isSignIn() && this.postForm.valid) {
+      this.myInfoService.getUser().then(user => {
+        this.boardService.addPost(
+          this.boardName, 
+          user.name, 
+          this.postForm.value.title,
+          this.postForm.value.content)
+          .then(response => {
+            this.router.navigate(['/board/'+this.boardName]);
+          })
+      })
+    }
   }
 
 }
