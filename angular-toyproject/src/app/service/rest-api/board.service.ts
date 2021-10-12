@@ -53,5 +53,20 @@ export class BoardService {
       });
   }
 
+  viewPost (postId: number) : Promise<Post> {
+    const getPostUrl = this.getBoardUrl + '/post/' + postId;
+
+    return this.http.get<ApiResponseSingle> (getPostUrl) 
+      .toPromise()
+      .then(this.apiValidationService.validateResponse)
+      .then(response => {
+        return response.data as Post;
+      })
+      .catch (response => {
+        alert('[게시글 조회 중 오류발생]\n' + response.error.msg);
+        return Promise.reject(response.error.msg);
+      })
+  }
+
 
 }
