@@ -38,6 +38,10 @@ public class BoardService {
     private final UserJpaRepo userJpaRepo;
     //private final CacheService cacheService;
 
+    public Board insertBoard(String boardName) {
+        return boardJpaRepo.save(Board.builder().name(boardName).build());
+    }
+
     //게시판 이름으로 게시판 조회
     //@Cacheable (value = redisConfig.CacheKey.BOARD, key = "#boardName", unless = "#result == null")
     public Board findBoard (String boardName) {

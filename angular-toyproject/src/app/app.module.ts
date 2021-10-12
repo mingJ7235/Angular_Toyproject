@@ -18,6 +18,7 @@ import { MyinfoComponent } from './component/member/myinfo/myinfo.component';
 import { MyinfoService } from './service/rest-api/myinfo.service';
 import { BoardComponent } from './component/board/board.component';
 import { BoardService } from './service/rest-api/board.service';
+import { PostComponent } from './component/board/post.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { BoardService } from './service/rest-api/board.service';
     LogoutComponent,
     MyinfoComponent,
     BoardComponent,
+    PostComponent,
 
   ],
   imports: [

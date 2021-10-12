@@ -14,7 +14,8 @@ const routes: Routes = [
   {path: 'signup', component: SignupComponent},
   {path: 'logout', component: LogoutComponent},
   {path: 'myinfo', component: MyinfoComponent, canActivate: [AuthGuard]},
-  {path: 'board/:boardName', component: BoardComponent}
+  {path: 'board/:boardName', component: BoardComponent},
+  {path: 'board/:boardName/post'}
 
 ];
 

@@ -1,15 +1,19 @@
 package com.rest.angular_api.entity.boards;
 
 import com.rest.angular_api.entity.util.CommonDateEntity;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
+@Builder
 @Entity
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Board extends CommonDateEntity /*implements Serializable*/ {
 
     @Id
