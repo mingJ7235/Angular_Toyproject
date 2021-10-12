@@ -15,7 +15,7 @@ export class BoardService {
     private apiValidationService : ApiValidationService
   ) { };
 
-  private getBoardUrl = 'api/v1/board'
+  private getBoardUrl = '/api/v1/board'
 
   //게시물 리스트 가져오기
   getPosts(boardName : string) : Promise<Post[]> {
@@ -54,12 +54,13 @@ export class BoardService {
   }
 
   viewPost (postId: number) : Promise<Post> {
-    const getPostUrl = this.getBoardUrl + '/post/' + postId;
+    const getPostUrl = this.getBoardUrl +'/post/' + postId;
 
     return this.http.get<ApiResponseSingle> (getPostUrl) 
       .toPromise()
       .then(this.apiValidationService.validateResponse)
       .then(response => {
+
         return response.data as Post;
       })
       .catch (response => {

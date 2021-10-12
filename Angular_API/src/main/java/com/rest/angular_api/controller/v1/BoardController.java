@@ -6,7 +6,6 @@ import com.rest.angular_api.model.board.ParamsPost;
 import com.rest.angular_api.model.response.CommonResult;
 import com.rest.angular_api.model.response.ListResult;
 import com.rest.angular_api.model.response.SingleResult;
-import com.rest.angular_api.repository.PostJpaRepo;
 import com.rest.angular_api.service.ResponseService;
 import com.rest.angular_api.service.board.BoardService;
 import io.swagger.annotations.Api;
@@ -64,6 +63,7 @@ public class BoardController {
     @ApiOperation(value = "게시글 상세", notes = "게시글 상세정보를 조회한다.")
     @GetMapping(value = "/post/{postId}")
     public SingleResult<Post> post(@PathVariable long postId) {
+        System.out.println(boardService.getPost(postId).getTitle());
         return responseService.getSingleResult(boardService.getPost(postId));
     }
 
