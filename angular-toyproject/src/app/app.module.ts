@@ -17,6 +17,7 @@ import { LogoutComponent } from './component/logout/logout.component';
 import { MyinfoComponent } from './component/member/myinfo/myinfo.component';
 import { MyinfoService } from './service/rest-api/myinfo.service';
 import { BoardComponent } from './component/board/board.component';
+import { BoardService } from './service/rest-api/board.service';
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import { BoardComponent } from './component/board/board.component';
       multi : true,
     }, 
     SignService,
-    MyinfoService
+    MyinfoService,
+    BoardService
   ],
   bootstrap: [
     AppComponent

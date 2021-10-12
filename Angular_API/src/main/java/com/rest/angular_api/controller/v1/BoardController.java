@@ -23,7 +23,7 @@ import javax.validation.Valid;
 @Api(tags = {"3. Board"})
 @RequiredArgsConstructor
 @RestControllerAdvice
-@RequestMapping (value = "/vi/board")
+@RequestMapping (value = "/v1/board")
 public class BoardController {
 
     private final BoardService boardService;
