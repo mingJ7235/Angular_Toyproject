@@ -39,6 +39,7 @@ export class PostViewComponent implements OnInit {
         .then(user => {
           this.loginUser = user;
         });
+
     }
     this.boardService.viewPost(this.postId)
       .then(post =>{

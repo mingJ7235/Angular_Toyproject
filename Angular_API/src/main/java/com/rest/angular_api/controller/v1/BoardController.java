@@ -63,7 +63,6 @@ public class BoardController {
     @ApiOperation(value = "게시글 상세", notes = "게시글 상세정보를 조회한다.")
     @GetMapping(value = "/post/{postId}")
     public SingleResult<Post> post(@PathVariable long postId) {
-        System.out.println(boardService.getPost(postId).getTitle());
         return responseService.getSingleResult(boardService.getPost(postId));
     }
 

@@ -1,5 +1,6 @@
 package com.rest.angular_api.entity.boards;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.rest.angular_api.entity.member.User;
 import com.rest.angular_api.entity.util.CommonDateEntity;
 import lombok.Getter;
@@ -13,7 +14,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class Post extends CommonDateEntity /*implements Serializable*/ {
     @Id
-    @GeneratedValue
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long postId;
 
     @Column (nullable = false, length = 50)
@@ -32,6 +33,12 @@ public class Post extends CommonDateEntity /*implements Serializable*/ {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn (name = "msrl")
     private User user;
+
+    // 이걸 하지 않으면 Join table이 Json 결과에 표시되어 예외가 나온다.
+    @JsonIgnore
+    public Board getBoard () {
+        return board;
+    }
 
     public Post(User user, Board board, String author, String title, String content) {
         this.author = author;
