@@ -69,5 +69,24 @@ export class BoardService {
       })
   }
 
+  modifyPost (post : Post) : Promise<Post> {
+    const postUrl = this.getBoardUrl + '/post/' + post.postId;
+    const params = new FormData();
+    params.append ('author', post.author);
+    params.append ('title', post.title);
+    params.append ('content', post.content);
+
+    return this.http.put<ApiResponseSingle>(postUrl, params)
+      .toPromise()
+      .then(this.apiValidationService.validateResponse)
+      .then(response => {
+        return response.data as Post;
+      })
+      .catch (response => {
+        alert('[게시물 수정 중 오류발생]\n' + response.error.msg);
+        return Promise.reject(response.error.msg);
+      })
+  }
+
 
 }

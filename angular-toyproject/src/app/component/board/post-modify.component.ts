@@ -42,7 +42,10 @@ export class PostModifyComponent implements OnInit {
   }
 
   submit() {
-
+    this.boardService.modifyPost(this.post)
+      .then (response =>{
+        this.router.navigate(['/board/' + this.boardName + '/post/' + this.postId])
+      })
   }
 
 }
