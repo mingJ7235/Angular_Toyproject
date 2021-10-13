@@ -88,5 +88,17 @@ export class BoardService {
       })
   }
 
-
+  deletePost (postId : number) : Promise <boolean> {
+    const deletePostUrl = this.getBoardUrl + /post/ + postId;
+    return this.http.delete<ApiResponseSingle> (deletePostUrl)
+      .toPromise()
+      .then(this.apiValidationService.validateResponse)
+      .then(response => {
+        return true;
+      })
+      .catch(response =>{
+        alert('[게시글 삭제 중 오류 발생]\n' + response.error.msg);
+        return Promise.reject(response.error.msg);
+      });
+  }
 }

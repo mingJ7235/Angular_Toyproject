@@ -17,6 +17,7 @@ export class BoardComponent implements OnInit {
   displayedColumns : string[] = ['postId', 'title', 'author', 'createdAt', 'modifiedAt'];
   boardName: string;
   loginUser : User;
+  boardMenu : [];
 
   /**
    * 게시판 주소로부터 게시판 이름 (boardName)이 Path variable로 넘어오게 되는데,
@@ -28,6 +29,7 @@ export class BoardComponent implements OnInit {
     public signService : SignService,
     private myInfoService : MyinfoService,
     private router : Router
+
     
     ) { 
       this.boardName = this.route.snapshot.params['boardName'];
@@ -41,6 +43,15 @@ export class BoardComponent implements OnInit {
       this.myInfoService.getUser()
         .then(user => {
           this.loginUser = user;
+        })
+    }
+  }
+
+  delete (postId : number) {
+    if (confirm('정말 삭제하시겠습니까?')) {
+      this.boardService.deletePost(postId)
+        .then(response => {
+          window.location.reload();
         })
     }
   }

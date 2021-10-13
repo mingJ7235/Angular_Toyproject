@@ -21,6 +21,7 @@ import { BoardService } from './service/rest-api/board.service';
 import { PostComponent } from './component/board/post.component';
 import { PostViewComponent } from './component/board/post-view.component';
 import { PostModifyComponent } from './component/board/post-modify.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { PostModifyComponent } from './component/board/post-modify.component';
     FormsModule,
     ReactiveFormsModule,
     // 외부 api와 통신하기 위해 필요한 HttpClientModule
-    HttpClientModule 
+    HttpClientModule,
+    TranslateModule.forRoot()
   ],
   exports:[
     ReactiveFormsModule

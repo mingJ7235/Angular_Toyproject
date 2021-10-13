@@ -5,15 +5,15 @@
       <form [formGroup]="postForm" (ngSubmit)="submit()">
         <p>
           <mat-form-field>
-            <!-- <input type="text" [(ngModel)]="post.title" matInput placeholder="제목" formControlName="title"> -->
-            <input type="text" value="{{post.title}}" matInput placeholder="제목" formControlName="title">
+            <input type="text" [(ngModel)]="post.title" matInput placeholder="제목" formControlName="title">
+            <!-- <input type="text" value="{{post.title}}" matInput placeholder="제목" formControlName="title"> -->
             <!--  -->
           </mat-form-field>
         </p>
         <p>
           <mat-form-field>
-            <!-- <textarea [(ngModel)]="post.content" matInput placeholder="내용" formControlName="content" rows="5"></textarea> -->
-            <textarea value="{{post.content}}" matInput placeholder="내용" formControlName="content" rows="5"></textarea>
+            <textarea [(ngModel)]="post.content" matInput placeholder="내용" formControlName="content" rows="5"></textarea>
+            <!-- <textarea value="{{post.content}}" matInput placeholder="내용" formControlName="content" rows="5"></textarea> -->
 
           </mat-form-field>
         </p>

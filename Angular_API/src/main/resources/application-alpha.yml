@@ -23,4 +23,4 @@ spring:
     showSql: true
     generate-ddl: false
   url:
-    base : http://alpha.mj.org
+    base: http://alpha.mj.org

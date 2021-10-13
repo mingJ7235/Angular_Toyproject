@@ -2,7 +2,7 @@
     <mat-card class="card">
         <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
             <div>
-                <h3>자유 게시판</h3>
+                <h3>{{'BOARD.NAME' | translate}}</h3>
                 <button mat-raised-button color="primary" [routerLink]="['/board',boardName, 'post']">
                     <mat-icon>add</mat-icon> Add Post
                 </button>
@@ -46,7 +46,10 @@
                                 *ngIf="signService.isSignIn() && loginUser?.msrl == element?.user.msrl"
                                 [routerLink]="['/board', boardName, 'post', element.postId, 'modify']">edit</mat-icon>
                             
-                            <mat-icon class="icon">delete_forever</mat-icon>
+                            <mat-icon class="icon"
+                                *ngIf="signService.isSignIn() && loginUser?.msrl == element?.user.msrl" 
+                                (click)="delete(element.postId)"
+                            >delete_forever</mat-icon>
                         </mat-cell>
                     </ng-container>
                     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
