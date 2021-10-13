@@ -22,6 +22,7 @@ import { PostComponent } from './component/board/post.component';
 import { PostViewComponent } from './component/board/post-view.component';
 import { PostModifyComponent } from './component/board/post-modify.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { AlertDialogComponent } from './component/common/alert-dialog/alert-dialog.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { TranslateModule } from '@ngx-translate/core';
     PostComponent,
     PostViewComponent,
     PostModifyComponent,
+    AlertDialogComponent,
 
   ],
   imports: [
