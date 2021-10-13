@@ -94,6 +94,7 @@ public class BoardService {
     public Post updatePost (long postId, String uid, ParamsPost paramsPost) {
         Post post = getPost(postId);
         User user = post.getUser();
+        System.out.println();
         if (!uid.equals(user.getUid())) {
             throw new CNotOwnerException();
         }
