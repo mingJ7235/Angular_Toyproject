@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DialogService } from 'src/app/service/dialog/dialog.service';
 import { SignService } from 'src/app/service/rest-api/sign.service';
 
 @Component({
@@ -10,13 +11,14 @@ import { SignService } from 'src/app/service/rest-api/sign.service';
 })
 export class SigninComponent implements OnInit{
 
-  redirectTo !: string;
+  redirectTo : string;
   signInForm : FormGroup
 
   constructor(
     private signService : SignService,
     private router: Router,
     private route: ActivatedRoute,
+    private dialogService: DialogService
 
     ) { 
     this.signInForm = new FormGroup ({
@@ -45,7 +47,12 @@ export class SigninComponent implements OnInit{
     if (this.signInForm.valid) {
       this.signService.signIn(this.signInForm.value.id, this.signInForm.value.password)
         .then (data => {
-          this.router.navigate([this.redirectTo ? this.redirectTo : '/'])
+          this.dialogService.alert('안내', '로그인이 완료되었습니다.').afterClosed()
+            .subscribe(result => {
+              if(result) {
+                this.router.navigate([this.redirectTo ? this.redirectTo : '/']);
+              }
+            })
         })
     }
   }
