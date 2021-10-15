@@ -70,7 +70,8 @@ import { ConfirmDialogComponent } from './component/common/confirm-dialog/confir
   ],
   // AlertDialogComponent는 시스템 전역에서 사용되므로 최초에 로드되어 있어야한다. 따라서 app.module.ts의 entryComponents항목에 설정해야한다. 
   entryComponents :[
-    AlertDialogComponent
+    AlertDialogComponent,
+    ConfirmDialogComponent
   ],
   bootstrap: [
     AppComponent

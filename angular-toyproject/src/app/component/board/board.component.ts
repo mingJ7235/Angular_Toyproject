@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from 'src/app/model/board/Post';
 import { User } from 'src/app/model/myinfo/User';
+import { DialogService } from 'src/app/service/dialog/dialog.service';
 import { BoardService } from 'src/app/service/rest-api/board.service';
 import { MyinfoService } from 'src/app/service/rest-api/myinfo.service';
 import { SignService } from 'src/app/service/rest-api/sign.service';
@@ -28,7 +29,8 @@ export class BoardComponent implements OnInit {
     private route : ActivatedRoute,
     public signService : SignService,
     private myInfoService : MyinfoService,
-    private router : Router
+    private router : Router,
+    private dialogService : DialogService
 
     
     ) { 
@@ -48,12 +50,21 @@ export class BoardComponent implements OnInit {
   }
 
   delete (postId : number) {
-    if (confirm('정말 삭제하시겠습니까?')) {
-      this.boardService.deletePost(postId)
-        .then(response => {
-          window.location.reload();
-        })
-    }
+  //   if (confirm('정말 삭제하시겠습니까?')) {
+  //     this.boardService.deletePost(postId)
+  //       .then(response => {
+  //         window.location.reload();
+  //       })
+  //   }
+  // }
+  this.dialogService.confirm('삭제 요청 확인', '정말로 게시물을 삭제하시겠습니까?')
+    .afterClosed().subscribe(result => {
+      if(result) {
+        this.boardService.deletePost(postId)
+          .then(response => {
+            window.location.reload();
+          })
+      }
+    });
   }
-
 }
