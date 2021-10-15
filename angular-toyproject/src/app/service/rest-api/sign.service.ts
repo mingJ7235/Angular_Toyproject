@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ApiResponseSingle } from 'src/app/model/common/ApiResponseSingle';
+import { DialogService } from '../dialog/dialog.service';
 import { ApiValidationService } from './common/api-validation.service';
 
 /**
@@ -18,9 +19,11 @@ export class SignService {
 
   constructor(
     private http: HttpClient,
-    private apiValidationService: ApiValidationService
+    private apiValidationService: ApiValidationService,
+    private dialogService : DialogService
     ) { }
 
+  //로그인 api 연동
   signIn (id: string, password: string): Promise<any> {
     const params = new FormData();
     params.append('id', id);
@@ -32,12 +35,12 @@ export class SignService {
         localStorage.setItem('x-auth-token', response.data);
       })
       .catch(response =>{
-        alert('[로그인 실패]\n' + response.error.msg);
+        this.dialogService.alert('[로그인 실패]\n', response.error.msg);
         return Promise.reject(response.error.msg);
       }) 
-
-      
   }
+
+  //가입 api 연동
   signUp(id: string, password: string, name: string): Promise<any> {
     const params = new FormData();
     params.append('id', id);
@@ -50,7 +53,7 @@ export class SignService {
         return true;
       })
       .catch(response => {
-        alert('[회원 가입중 오류 발생]\n' + response.error.msg);  
+        this.dialogService.alert('[회원 가입중 오류 발생]', response.error.msg);  
         return Promise.reject(response.error.msg);
       });
   }
