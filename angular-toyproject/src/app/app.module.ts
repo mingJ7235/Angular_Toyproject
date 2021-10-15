@@ -24,6 +24,7 @@ import { PostModifyComponent } from './component/board/post-modify.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { AlertDialogComponent } from './component/common/alert-dialog/alert-dialog.component';
 import { ConfirmDialogComponent } from './component/common/confirm-dialog/confirm-dialog.component';
+import { BoardResolve } from './component/board/resolve/board-resolve';
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import { ConfirmDialogComponent } from './component/common/confirm-dialog/confir
     }, 
     SignService,
     MyinfoService,
-    BoardService
+    BoardService,
+    BoardResolve
   ],
   // AlertDialogComponent는 시스템 전역에서 사용되므로 최초에 로드되어 있어야한다. 따라서 app.module.ts의 entryComponents항목에 설정해야한다. 
   entryComponents :[
