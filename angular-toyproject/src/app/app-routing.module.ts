@@ -5,6 +5,7 @@ import { PostModifyComponent } from './component/board/post-modify.component';
 import { PostViewComponent } from './component/board/post-view.component';
 import { PostComponent } from './component/board/post.component';
 import { BoardResolve } from './component/board/resolve/board-resolve';
+import { Error404Component } from './component/common/error/error404.component';
 import { HomeComponent } from './component/home.component';
 import { LogoutComponent } from './component/logout/logout.component';
 import { MyinfoComponent } from './component/member/myinfo/myinfo.component';
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path: 'board/:boardName/post', component: PostComponent, canActivate: [AuthGuard]},
   {path: 'board/:boardName/post/:postId', component: PostViewComponent},
   {path: 'board/:boardName/post/:postId/modify', component: PostModifyComponent, canActivate: [AuthGuard]},
+  {path: '**', component: Error404Component}
 
 ];
 
