@@ -37,10 +37,13 @@ export class BoardComponent implements OnInit {
       this.boardName = this.route.snapshot.params['boardName'];
     }
 
-  ngOnInit(): void {
-    this.boardService.getPosts(this.boardName).then(response => {
-      this.posts =response;
-    });
+  ngOnInit() {
+    // this.boardService.getPosts(this.boardName).then(response => {
+    //   this.posts =response;
+    // });
+    
+    //route에서 resolve된 데이터가 posts 란 이름으로 전달이된다. 
+    this.posts = this.route.snapshot.data['posts'];
     if (this.signService.isSignIn()) {
       this.myInfoService.getUser()
         .then(user => {

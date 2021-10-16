@@ -25,6 +25,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AlertDialogComponent } from './component/common/alert-dialog/alert-dialog.component';
 import { ConfirmDialogComponent } from './component/common/confirm-dialog/confirm-dialog.component';
 import { BoardResolve } from './component/board/resolve/board-resolve';
+import { Error404Component } from './component/common/error/error404.component';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { BoardResolve } from './component/board/resolve/board-resolve';
     PostModifyComponent,
     AlertDialogComponent,
     ConfirmDialogComponent,
+    Error404Component,
 
   ],
   imports: [
