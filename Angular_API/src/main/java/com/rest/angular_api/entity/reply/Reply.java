@@ -14,7 +14,10 @@ import javax.persistence.*;
 public class Reply extends CommonDateEntity {
 
     @Id @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long replyId;
+
+    @Column (length = 500)
+    private String replyContent;
 
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "msrl")
