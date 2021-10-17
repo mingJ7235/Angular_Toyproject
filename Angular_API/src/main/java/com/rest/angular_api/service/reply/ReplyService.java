@@ -24,13 +24,31 @@ public class ReplyService {
     private final PostJpaRepo postJpaRepo;
     private final ReplyJpaRepo replyJpaRepo;
 
-    public Reply saveReply (String email, Long postId, ParamsPost paramsPost) {
+    public Reply saveReply (String email, Long postId, Long parentReplyId ,ParamsPost paramsPost) {
         User user = userJpaRepo.findByUid(email).orElseThrow(CUserExistException::new);
         Post post = postJpaRepo.findById(postId).orElseThrow(CResourceNotExistException::new);
-        Reply reply = Reply.builder()
-                .replyContent(paramsPost.getContent())
-                .level()
-                .build();
+        if (parentReplyId == 0) { // 부모 댓글일 경우
+            Reply reply = Reply.builder()
+                    .replyContent(paramsPost.getContent())
+                    .level(1)
+                    .isLive(true)
+                    .user(user)
+                    .post(post)
+                    .parentReply(null)
+                    .build();
+            return reply;
+        } else {
+            Reply parentReply = replyJpaRepo.findById(parentReplyId).orElseThrow(CResourceNotExistException::new);
+            Reply reply = Reply.builder()
+                    .replyContent(paramsPost.getContent())
+                    .level(parentReply.getLevel() + 1)
+                    .isLive(true)
+                    .user(user)
+                    .post(post)
+                    .parentReply(parentReply)
+                    .build();
+            return reply;
+        }
 
     }
 

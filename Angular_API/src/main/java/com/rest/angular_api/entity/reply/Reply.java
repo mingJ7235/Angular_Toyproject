@@ -42,14 +42,13 @@ public class Reply extends CommonDateEntity {
     private List<Reply> childrenReply = new ArrayList<>();
 
     @Builder
-    public Reply (String replyContent, int level, boolean isLive, User user, Post post, Reply parentReply, List<Reply> childrenReply){
+    public Reply (String replyContent, int level, boolean isLive, User user, Post post, Reply parentReply){
         this.replyContent = replyContent;
         this.level = level;
         this.isLive = isLive;
         this.user = user;
         this.post = post;
         this.parentReply = parentReply;
-        this.childrenReply = childrenReply;
     }
 
 }
