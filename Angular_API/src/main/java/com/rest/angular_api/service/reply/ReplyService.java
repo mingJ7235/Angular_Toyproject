@@ -56,18 +56,20 @@ public class ReplyService {
 
     }
 
-    public Reply updateReply (String email, Long postId, ParamsReply paramsReply) {
+    public Reply updateReply (String email, Long postId, Long replyId, ParamsReply paramsReply) {
 
         User user = userJpaRepo.findByUid(email).orElseThrow(CUserExistException::new);
         long findMsrl = postJpaRepo.findById(postId).orElseThrow(CResourceNotExistException::new).getUser().getMsrl();
-
+        Reply reply = replyJpaRepo.findById(replyId).orElseThrow(CResourceNotExistException::new);
 
         if (user.getMsrl() == findMsrl) {
+            return Reply.builder()
 
+                    .build();
+        } else {
+            throw new CResourceNotExistException();
         }
 
-        return Reply.builder()
-                .build();
     }
 
     private Reply getReply (Long replyId) {
