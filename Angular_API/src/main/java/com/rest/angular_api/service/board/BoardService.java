@@ -9,7 +9,9 @@ import com.rest.angular_api.entity.member.User;
 import com.rest.angular_api.model.board.ParamsPost;
 import com.rest.angular_api.repository.BoardJpaRepo;
 import com.rest.angular_api.repository.PostJpaRepo;
+import com.rest.angular_api.repository.ReplyJpaRepo;
 import com.rest.angular_api.repository.UserJpaRepo;
+import com.rest.angular_api.service.reply.ReplyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,6 +38,7 @@ public class BoardService {
     private final BoardJpaRepo boardJpaRepo;
     private final PostJpaRepo postJpaRepo;
     private final UserJpaRepo userJpaRepo;
+    private final ReplyJpaRepo replyJpaRepo;
     //private final CacheService cacheService;
 
     public Board insertBoard(String boardName) {

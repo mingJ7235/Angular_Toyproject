@@ -37,6 +37,7 @@ public class ReplyService {
                     .post(post)
                     .parentReply(null)
                     .build();
+            replyJpaRepo.save(reply);
             return reply;
         } else {
             Long parentReplyId = paramsReply.getParentReplyId();
@@ -49,12 +50,22 @@ public class ReplyService {
                     .post(post)
                     .parentReply(parentReply)
                     .build();
+            replyJpaRepo.save(reply);
             return reply;
         }
 
     }
 
-    public Reply updateReply () {
+    public Reply updateReply (String email, Long postId, ParamsReply paramsReply) {
+
+        User user = userJpaRepo.findByUid(email).orElseThrow(CUserExistException::new);
+        long findMsrl = postJpaRepo.findById(postId).orElseThrow(CResourceNotExistException::new).getUser().getMsrl();
+
+
+        if (user.getMsrl() == findMsrl) {
+
+        }
+
         return Reply.builder()
                 .build();
     }
