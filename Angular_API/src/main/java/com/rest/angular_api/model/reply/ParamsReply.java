@@ -24,4 +24,7 @@ public class ParamsReply {
     @ApiModelProperty (value = "댓글 내용", required = true)
     private String content;
 
+    @ApiModelProperty (value = "부모 댓글 아이디 값")
+    private Long parentReplyId;
+
 }

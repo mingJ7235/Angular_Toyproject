@@ -6,6 +6,7 @@ import com.rest.angular_api.entity.boards.Post;
 import com.rest.angular_api.entity.member.User;
 import com.rest.angular_api.entity.reply.Reply;
 import com.rest.angular_api.model.board.ParamsPost;
+import com.rest.angular_api.model.reply.ParamsReply;
 import com.rest.angular_api.repository.PostJpaRepo;
 import com.rest.angular_api.repository.ReplyJpaRepo;
 import com.rest.angular_api.repository.UserJpaRepo;
@@ -24,12 +25,12 @@ public class ReplyService {
     private final PostJpaRepo postJpaRepo;
     private final ReplyJpaRepo replyJpaRepo;
 
-    public Reply saveReply (String email, Long postId, Long parentReplyId ,ParamsPost paramsPost) {
+    public Reply saveReply (String email, Long postId, ParamsReply paramsReply) {
         User user = userJpaRepo.findByUid(email).orElseThrow(CUserExistException::new);
         Post post = postJpaRepo.findById(postId).orElseThrow(CResourceNotExistException::new);
-        if (parentReplyId == 0) { // 부모 댓글일 경우
+        if (paramsReply.getParentReplyId() == null) { // 부모 댓글일 경우
             Reply reply = Reply.builder()
-                    .replyContent(paramsPost.getContent())
+                    .replyContent(paramsReply.getContent())
                     .level(1)
                     .isLive(true)
                     .user(user)
@@ -38,9 +39,10 @@ public class ReplyService {
                     .build();
             return reply;
         } else {
+            Long parentReplyId = paramsReply.getParentReplyId();
             Reply parentReply = replyJpaRepo.findById(parentReplyId).orElseThrow(CResourceNotExistException::new);
             Reply reply = Reply.builder()
-                    .replyContent(paramsPost.getContent())
+                    .replyContent(paramsReply.getContent())
                     .level(parentReply.getLevel() + 1)
                     .isLive(true)
                     .user(user)
