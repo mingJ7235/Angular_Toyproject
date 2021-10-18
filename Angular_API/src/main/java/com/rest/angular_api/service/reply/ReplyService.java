@@ -52,6 +52,11 @@ public class ReplyService {
 
     }
 
+    public Reply updateReply () {
+        return Reply.builder()
+                .build();
+    }
+
     private Reply getReply (Long replyId) {
         return replyJpaRepo.findById(replyId).orElseThrow(CResourceNotExistException::new);
     }
