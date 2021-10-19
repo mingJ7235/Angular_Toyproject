@@ -59,12 +59,19 @@ public class ReplyService {
     public Reply updateReply (String email, Long postId, Long replyId, ParamsReply paramsReply) {
 
         User user = userJpaRepo.findByUid(email).orElseThrow(CUserExistException::new);
-        long findMsrl = postJpaRepo.findById(postId).orElseThrow(CResourceNotExistException::new).getUser().getMsrl();
+        Post post = postJpaRepo.findById(postId).orElseThrow(CResourceNotExistException::new);
+        long findMsrl = post.getUser().getMsrl();
         Reply reply = replyJpaRepo.findById(replyId).orElseThrow(CResourceNotExistException::new);
 
-        if (user.getMsrl() == findMsrl) {
+        if (user.getMsrl() == findMsrl && postId == reply.getPost().getPostId()) {
+            //dto -> setter로 변경해야함
             return Reply.builder()
-
+                    .replyContent(paramsReply.getContent())
+                    .level(reply.getLevel())
+                    .isLive(reply.isLive())
+                    .user(user)
+                    .post(post)
+                    .parentReply(reply.getParentReply())
                     .build();
         } else {
             throw new CResourceNotExistException();
