@@ -1,5 +1,6 @@
 package com.rest.angular_api.service.reply;
 
+import com.rest.angular_api.advice.exception.CNotOwnerException;
 import com.rest.angular_api.advice.exception.CResourceNotExistException;
 import com.rest.angular_api.advice.exception.CUserExistException;
 import com.rest.angular_api.entity.boards.Post;
@@ -77,6 +78,18 @@ public class ReplyService {
             throw new CResourceNotExistException();
         }
 
+    }
+
+    public void delteReply (String email, Long postId, Long replyId) {
+        User user = userJpaRepo.findByUid(email).orElseThrow(CUserExistException::new);
+
+        Reply reply = replyJpaRepo.findById(replyId).orElseThrow(CResourceNotExistException::new);
+
+        if (user.getMsrl() == reply.getUser().getMsrl()) {
+
+        } else {
+            throw new CNotOwnerException();
+        }
     }
 
     private Reply getReply (Long replyId) {
