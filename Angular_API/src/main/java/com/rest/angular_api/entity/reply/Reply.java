@@ -6,6 +6,7 @@ import com.rest.angular_api.entity.util.CommonDateEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor
 public class Reply extends CommonDateEntity {
 
@@ -24,7 +26,7 @@ public class Reply extends CommonDateEntity {
 
     private int level;
 
-    private boolean isLive;
+    private boolean isLive = true;
 
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "msrl")

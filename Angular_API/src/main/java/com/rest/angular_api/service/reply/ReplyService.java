@@ -80,13 +80,14 @@ public class ReplyService {
 
     }
 
-    public void delteReply (String email, Long postId, Long replyId) {
+    public void deleteReply (String email, Long postId, Long replyId) {
         User user = userJpaRepo.findByUid(email).orElseThrow(CUserExistException::new);
-
+        Post post = postJpaRepo.findById(postId).orElseThrow(CResourceNotExistException::new);
         Reply reply = replyJpaRepo.findById(replyId).orElseThrow(CResourceNotExistException::new);
 
         if (user.getMsrl() == reply.getUser().getMsrl()) {
-
+            reply.setLive(false); //dto로 담아서 바꿔야함
+            List<Reply> replyList = post.getReply();
         } else {
             throw new CNotOwnerException();
         }
