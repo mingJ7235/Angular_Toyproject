@@ -36,4 +36,18 @@ public class ReplyController {
         return responseService.getSingleResult(replyService.saveReply(uid, postId, paramsReply));
     }
 
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 access_token", required = true, dataType = "String", paramType = "header")
+    })
+    @ApiOperation(value = "댓글 수정", notes = "댓글을 수정한다.")
+    @PutMapping ("/{postId}/reply/{replyId}")
+    public SingleResult<Reply> updateReply (
+            @PathVariable Long postId,
+            @PathVariable Long replyId,
+            @ModelAttribute ParamsReply paramsReply) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String uid = authentication.getName();
+        return responseService.getSingleResult(replyService.updateReply(uid, postId, replyId, paramsReply));
+    }
+
 }
