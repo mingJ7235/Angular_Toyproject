@@ -2,6 +2,7 @@ package com.rest.angular_api.controller.v1;
 
 import com.rest.angular_api.entity.reply.Reply;
 import com.rest.angular_api.model.reply.ParamsReply;
+import com.rest.angular_api.model.response.CommonResult;
 import com.rest.angular_api.model.response.SingleResult;
 import com.rest.angular_api.service.ResponseService;
 import com.rest.angular_api.service.board.BoardService;
@@ -48,6 +49,21 @@ public class ReplyController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String uid = authentication.getName();
         return responseService.getSingleResult(replyService.updateReply(uid, postId, replyId, paramsReply));
+    }
+
+    @ApiImplicitParams({
+            @ApiImplicitParam (name = "X-AUTH-TOKEN", value = "로그인 성겅 호 access_token", required = true, dataType = "String", paramType = "header")
+    })
+    @ApiOperation(value = "댓글 삭제", notes = "댓글을 삭제한다.")
+    @DeleteMapping ("/{postId}/reply/{replyId}")
+    public CommonResult deleteReply (
+        @PathVariable Long postId,
+        @PathVariable Long replyId
+    ){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String uid = authentication.getName();
+        replyService.deleteReply(uid, postId, replyId);
+        return responseService.getSuccessResult();
     }
 
 }
