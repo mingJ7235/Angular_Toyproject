@@ -87,7 +87,7 @@ public class ReplyService {
 
         if (user.getMsrl() == reply.getUser().getMsrl()) {
             reply.setLive(false); //dto로 담아서 바꿔야함
-            List<Reply> replyList = post.getReply();
+            reply.setReplyContent("삭제된 댓글입니다. ");
         } else {
             throw new CNotOwnerException();
         }

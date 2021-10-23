@@ -52,7 +52,7 @@ public class ReplyController {
     }
 
     @ApiImplicitParams({
-            @ApiImplicitParam (name = "X-AUTH-TOKEN", value = "로그인 성겅 호 access_token", required = true, dataType = "String", paramType = "header")
+            @ApiImplicitParam (name = "X-AUTH-TOKEN", value = "로그인 성겅 후 access_token", required = true, dataType = "String", paramType = "header")
     })
     @ApiOperation(value = "댓글 삭제", notes = "댓글을 삭제한다.")
     @DeleteMapping ("/{postId}/reply/{replyId}")
