@@ -26,34 +26,43 @@ public class ReplyService {
     private final PostJpaRepo postJpaRepo;
     private final ReplyJpaRepo replyJpaRepo;
 
-    public Reply saveReply (String email, Long postId, ParamsReply paramsReply) {
+    public ParamsReply saveReply (String email, Long postId, ParamsReply paramsReply) {
         User user = userJpaRepo.findByUid(email).orElseThrow(CUserExistException::new);
         Post post = postJpaRepo.findById(postId).orElseThrow(CResourceNotExistException::new);
-        if (paramsReply.getParentReplyId() == null) { // 부모 댓글일 경우
-            Reply reply = Reply.builder()
-                    .replyContent(paramsReply.getContent())
-                    .level(1)
-                    .isLive(true)
-                    .user(user)
-                    .post(post)
-                    .parentReply(null)
-                    .build();
-            replyJpaRepo.save(reply);
-            return reply;
-        } else {
-            Long parentReplyId = paramsReply.getParentReplyId();
-            Reply parentReply = replyJpaRepo.findById(parentReplyId).orElseThrow(CResourceNotExistException::new);
-            Reply reply = Reply.builder()
-                    .replyContent(paramsReply.getContent())
-                    .level(parentReply.getLevel() + 1)
-                    .isLive(true)
-                    .user(user)
-                    .post(post)
-                    .parentReply(parentReply)
-                    .build();
-            replyJpaRepo.save(reply);
-            return reply;
+
+        if (paramsReply.getParentReplyId() == null) {
+
         }
+
+
+
+        return ParamsReply.builder().build();
+
+//        if (paramsReply.getParentReplyId() == null) { // 부모 댓글일 경우
+//            Reply reply = Reply.builder()
+//                    .replyContent(paramsReply.getContent())
+//                    .level(1)
+//                    .isLive(true)
+//                    .user(user)
+//                    .post(post)
+//                    .parentReply(null)
+//                    .build();
+//            replyJpaRepo.save(reply);
+//            return reply;
+//        } else {
+//            Long parentReplyId = paramsReply.getParentReplyId();
+//            Reply parentReply = replyJpaRepo.findById(parentReplyId).orElseThrow(CResourceNotExistException::new);
+//            Reply reply = Reply.builder()
+//                    .replyContent(paramsReply.getContent())
+//                    .level(parentReply.getLevel() + 1)
+//                    .isLive(true)
+//                    .user(user)
+//                    .post(post)
+//                    .parentReply(parentReply)
+//                    .build();
+//            replyJpaRepo.save(reply);
+//            return reply;
+//        }
 
     }
 
