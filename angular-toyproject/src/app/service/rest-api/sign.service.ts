@@ -53,7 +53,7 @@ export class SignService {
         return true;
       })
       .catch(response => {
-        this.dialogService.alert('[회원 가입중 오류 발생]', response.error.msg);  
+        this.dialogService.alert('[회원 가입중 오류 발생했습니다.]', response.error.msg);  
         return Promise.reject(response.error.msg);
       });
   }
